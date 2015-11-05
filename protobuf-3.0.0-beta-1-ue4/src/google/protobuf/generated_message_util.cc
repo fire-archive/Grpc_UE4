@@ -61,6 +61,17 @@ void InitEmptyString() {
 }
 
 
+const ::std::string& GetEmptyStringAlreadyInited() {
+	assert(empty_string_ != NULL);
+	return *empty_string_;
+}
+
+const ::std::string& GetEmptyString() {
+	::google::protobuf::GoogleOnceInit(&empty_string_once_init_, &InitEmptyString);
+	return GetEmptyStringAlreadyInited();
+}
+
+
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
