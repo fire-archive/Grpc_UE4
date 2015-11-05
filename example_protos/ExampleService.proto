@@ -1,0 +1,55 @@
+// Copyright 2015 Paddle Creek Games Inc. All Rights Reserved.
+//
+// RPC & message definitions for a simple example service
+// which authenticates a user and returns information about
+// his/her character.
+
+syntax="proto3";
+
+// The package ends up being the c++ namespace. Ie: ::example_proto:
+package example_proto;
+
+// Instructs the proto compiler to generate service stubs.
+option cc_generic_services = true;
+
+// Import definitions for our character from another proto.
+import "ExampleCharacter.proto";
+
+// A simple INSECURE auth request. If you were to use such a beast you should
+// ensure you're using an encrypted RpcChannel.
+message AuthRequest {
+  // Username to authenticate.
+  string Username = 1;
+  // Some hasahed password. Heh.
+  string Hash = 2;
+}
+
+// Message sent from server to client on a successfull authentication.
+message SuccessfullAuthResponse {
+  // The authentication token for a succeeded authentication.
+  string AuthToken = 1;
+  // Character information for the user.
+  ExampleCharacter CharacterInfo = 2;
+}
+
+// Message sent from server to client on a failed authentication.
+message FailedAuthResponse {
+    // An error message to display to the user on failed authentication.
+    string ErrorMessage = 1;
+}
+
+// Message sent in from server to client in response to an authentication request.
+message AuthResponse {
+  oneof AuthResponse_Oneof {
+    // Login data for a successfully authenticated user.
+    SuccessfullAuthResponse SuccessfullAuthData = 1;
+    // Error data for a failed auth request.
+    FailedAuthResponse FailedAuthData = 2;
+  }
+}
+
+// Definition of the service which services authentication requests from clients.
+service AuthService {
+  // Authenticate the client.
+  rpc Authenticate(AuthRequest) returns (AuthResponse);
+}

@@ -1,0 +1,22 @@
+// Copyright 2015 Paddle Creek Games Inc. All Rights Reserved.
+//
+// Simple protobuf which describes a 'character' for example
+// purposes.
+//
+
+syntax="proto3";
+
+// The package ends up being the c++ namespace. Ie: ::example_proto:
+package example_proto;
+
+// A very simple definition for a character.
+message ExampleCharacter {
+  // Persistent ID for the character.
+  string Id = 1;
+  // Name of the character.
+  string Name = 2;
+  // Amount of health the character has.
+  int64 Health = 3;
+  // Amount of armor the character has.
+  int64 Armor = 4;
+}
