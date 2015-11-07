@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{4CA4F30C-4B54-E79D-A058-D2BDBA298010}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "ProtoRPC_UE4",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

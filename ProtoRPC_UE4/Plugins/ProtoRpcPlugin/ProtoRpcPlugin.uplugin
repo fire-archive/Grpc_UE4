@@ -1,0 +1,21 @@
+{
+    "FileVersion" : 3,
+	
+	"FriendlyName" : "ProtoRPCPlugin",
+	"Version" : 1,
+	"VersionName" : "0.1.0",
+	"CreatedBy" : "San Mehat",
+	"CreatedByURL" : "http://www.paddlecreekgames.com",
+	"EngineVersion" : "4.9+",
+	"Description" : "ProtoBuffer RPC services",
+	"Category" : "Network",
+	
+    "Modules" :
+	[
+		{
+			"Name" : "ProtoRpcPlugin",
+			"Type" : "Runtime",
+			"WhitelistPlatforms" : [ "Win64", "Win32" ]
+		}
+	]
+}
