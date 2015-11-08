@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2015 Paddle Creek Games Inc. All Rights Reserved.
 
 using UnrealBuildTool;
 using System.Collections.Generic;

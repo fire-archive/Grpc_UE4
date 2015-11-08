@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2015 Paddle Creek Games Inc. All Rights Reserved.
 #include "ProtoRPC_UE4PrivatePCH.h"
 
 #include "AllowWindowsPlatformTypes.h"
