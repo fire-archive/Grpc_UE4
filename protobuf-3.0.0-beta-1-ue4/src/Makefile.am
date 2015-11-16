@@ -163,6 +163,7 @@ nobase_include_HEADERS =                                        \
   google/protobuf/util/json_util.h                              \
   google/protobuf/util/time_util.h                              \
   google/protobuf/util/type_resolver_util.h                     \
+  google/protobuf/util/windows_util.h                     \
   google/protobuf/util/message_differencer.h
 
 lib_LTLIBRARIES = libprotobuf-lite.la libprotobuf.la libprotoc.la
@@ -288,7 +289,8 @@ libprotobuf_la_SOURCES =                                       \
   google/protobuf/util/json_util.cc                            \
   google/protobuf/util/message_differencer.cc                  \
   google/protobuf/util/time_util.cc                            \
-  google/protobuf/util/type_resolver_util.cc
+  google/protobuf/util/type_resolver_util.cc                   \
+  google/protobuf/util/windows_util.cc
 
 nodist_libprotobuf_la_SOURCES = $(nodist_libprotobuf_lite_la_SOURCES)
 

@@ -116,6 +116,7 @@ copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\util\message_differenc
 copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\util\time_util.h include\google\protobuf\util\time_util.h
 copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\util\type_resolver.h include\google\protobuf\util\type_resolver.h
 copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\util\type_resolver_util.h include\google\protobuf\util\type_resolver_util.h
+copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\util\windows_util.h include\google\protobuf\util\windows_util.h
 copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\wire_format.h include\google\protobuf\wire_format.h
 copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\wire_format_lite.h include\google\protobuf\wire_format_lite.h
 copy ${PROTOBUF_SOURCE_WIN32_PATH}\..\src\google\protobuf\wire_format_lite_inl.h include\google\protobuf\wire_format_lite_inl.h

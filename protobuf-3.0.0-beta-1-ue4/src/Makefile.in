@@ -235,7 +235,8 @@ am_libprotobuf_la_OBJECTS = $(am__objects_1) google/protobuf/any.pb.lo \
 	google/protobuf/util/json_util.lo \
 	google/protobuf/util/message_differencer.lo \
 	google/protobuf/util/time_util.lo \
-	google/protobuf/util/type_resolver_util.lo
+	google/protobuf/util/type_resolver_util.lo \
+	google/protobuf/util/windows_util.lo \
 nodist_libprotobuf_la_OBJECTS =
 libprotobuf_la_OBJECTS = $(am_libprotobuf_la_OBJECTS) \
 	$(nodist_libprotobuf_la_OBJECTS)
@@ -748,6 +749,7 @@ am__nobase_include_HEADERS_DIST =  \
 	google/protobuf/util/json_util.h \
 	google/protobuf/util/time_util.h \
 	google/protobuf/util/type_resolver_util.h \
+	google/protobuf/util/windows_util.h \
 	google/protobuf/util/message_differencer.h
 HEADERS = $(nobase_include_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
@@ -1229,6 +1231,7 @@ nobase_include_HEADERS = \
   google/protobuf/util/json_util.h                              \
   google/protobuf/util/time_util.h                              \
   google/protobuf/util/type_resolver_util.h                     \
+  google/protobuf/util/windows_util.h                           \
   google/protobuf/util/message_differencer.h
 
 lib_LTLIBRARIES = libprotobuf-lite.la libprotobuf.la libprotoc.la
@@ -1353,7 +1356,8 @@ libprotobuf_la_SOURCES = \
   google/protobuf/util/json_util.cc                            \
   google/protobuf/util/message_differencer.cc                  \
   google/protobuf/util/time_util.cc                            \
-  google/protobuf/util/type_resolver_util.cc
+  google/protobuf/util/type_resolver_util.cc                   \
+  google/protobuf/util/windows_util.cc
 
 nodist_libprotobuf_la_SOURCES = $(nodist_libprotobuf_lite_la_SOURCES)
 libprotoc_la_LIBADD = $(PTHREAD_LIBS) libprotobuf.la
@@ -2152,6 +2156,9 @@ google/protobuf/util/time_util.lo:  \
 	google/protobuf/util/$(am__dirstamp) \
 	google/protobuf/util/$(DEPDIR)/$(am__dirstamp)
 google/protobuf/util/type_resolver_util.lo:  \
+	google/protobuf/util/$(am__dirstamp) \
+	google/protobuf/util/$(DEPDIR)/$(am__dirstamp)
+google/protobuf/util/windows_util.lo:  \
 	google/protobuf/util/$(am__dirstamp) \
 	google/protobuf/util/$(DEPDIR)/$(am__dirstamp)
 
@@ -3449,6 +3456,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/protobuf_test-type_resolver_util_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/time_util.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/type_resolver_util.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/windows_util.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/internal/$(DEPDIR)/datapiece.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/internal/$(DEPDIR)/default_value_objectwriter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/internal/$(DEPDIR)/error_listener.Plo@am__quote@

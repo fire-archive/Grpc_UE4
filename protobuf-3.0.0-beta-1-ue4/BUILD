@@ -106,6 +106,7 @@ cc_library(
         "src/google/protobuf/util/message_differencer.cc",
         "src/google/protobuf/util/time_util.cc",
         "src/google/protobuf/util/type_resolver_util.cc",
+	"src/google/protobuf/util/windows_util.cc",
         "src/google/protobuf/wire_format.cc",
         "src/google/protobuf/wrappers.pb.cc",
     ],
