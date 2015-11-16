@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Engine.h"
+#include "Http.h"
 
 #include "google/protobuf/service.h"
 
@@ -20,4 +21,6 @@ public:
 	virtual bool IsCanceled() const override;
 	virtual void NotifyOnCancel(google::protobuf::Closure* callback) override;
 private:
+	bool failed_;
+	std::string error_reason_;
 };

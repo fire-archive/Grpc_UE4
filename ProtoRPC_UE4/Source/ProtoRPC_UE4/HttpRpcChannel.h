@@ -3,8 +3,19 @@
 #pragma once
 
 #include "Engine.h"
+#include "Http.h"
 
 #include "google/protobuf/service.h"
+
+namespace google {
+	namespace protobuf {
+		namespace util {
+			class TypeResolver;
+		}  // namespace util.
+	}  // namespace protobuf.
+}  // namespace google.
+
+class HttpRpcRequest;
 
 class HttpRpcChannel : public google::protobuf::RpcChannel {
 public:
@@ -19,5 +30,12 @@ public:
 		const google::protobuf::Message* request, google::protobuf::Message* response, 
 		google::protobuf::Closure* done) override;
 private:
+	// Service URI for this channel.
 	FString serviceUri_;
+	// Next available request ID.
+	int64 nextRequestId_;
+	// Map of outstanding requests.
+	TMap<int64, HttpRpcRequest*> outstandingRequests_;
+	FCriticalSection outstandingRequestsLock_;
+	TScopedPointer<google::protobuf::util::TypeResolver> typeResolver_;
 };

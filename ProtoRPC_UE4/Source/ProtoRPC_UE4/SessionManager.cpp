@@ -11,7 +11,7 @@
 
 SessionManager::SessionManager()
     : sessionState_(SessionState::SS_NotAuthenticated),
-	  channel_(new HttpRpcChannel("http://bleh.com:1234")),
+	  channel_(new HttpRpcChannel("http://127.0.0.1:8080/rpc")),
       controller_(new HttpRpcController()),
       authService_(new example_proto::AuthService::Stub(channel_)),
       authRequest_(new example_proto::AuthRequest()),

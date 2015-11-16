@@ -8,8 +8,8 @@ public class ProtoRPC_UE4 : ModuleRules
 	public ProtoRPC_UE4(TargetInfo Target)
 	{
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ProtoRpcPlugin" });
-
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		//PrivateIncludePathModulesNames.AddRange(new string[] { "HTTP" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
