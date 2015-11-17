@@ -7,6 +7,7 @@
 #include <google/protobuf//message.h>
 #include <google/protobuf/util/json_util.h>
 #include <google/protobuf/util/type_resolver_util.h>
+#include <google/protobuf/util/windows_util.h>
 
 DEFINE_LOG_CATEGORY_STATIC(HttpRpcRequestLog, Log, All);
 #define LOCTEXT_NAMESPACE "HttpRpcRequest"
@@ -19,7 +20,6 @@ using google::protobuf::MethodDescriptor;
 using google::protobuf::RpcController;
 using google::protobuf::Message;
 using google::protobuf::MethodDescriptor;
-using google::protobuf::util::BinaryToJsonString;
 using google::protobuf::util::JsonOptions;
 using google::protobuf::util::JsonToBinaryString;
 using google::protobuf::util::NewTypeResolverForDescriptorPool;
@@ -87,18 +87,13 @@ bool HttpRpcRequest::SerializeAsProtoBinary() {
 bool HttpRpcRequest::SerializeAsJSON() {
 	FString stringBuffer;
 	{
-		std::string jsonString;
-		// TODO(san): FIX THIS UGLY UGLY HACK.
-		// So.... the proto library interface for JSON serialization takes a mutable string pointer
-		// which it extends. This is bad since the proto library is hosted in a .dll which has its
-		// own heap. As a work-around, we pre-allocate space in the string on OUR heap before passing
-		// it in to the proto library.
-		jsonString.reserve(1024 * 64);
+		std::string* jsonString = nullptr;
 		{
 			JsonOptions jsonOptions;
 			jsonOptions.always_print_primitive_fields = true;
 			jsonOptions.add_whitespace = true;
-			Status status = BinaryToJsonString(typeResolver_,
+			Status status = google::protobuf::util::windows::SerializeToJsonString(
+				typeResolver_,
 				GetTypeUrl(callState_.GetRequest()->GetDescriptor()),
 				callState_.GetRequest()->SerializeAsString(),
 				&jsonString,
@@ -112,7 +107,10 @@ bool HttpRpcRequest::SerializeAsJSON() {
 				return false;
 			}
 		}
-		stringBuffer = FString(jsonString.c_str());
+		if (jsonString != nullptr) {
+			stringBuffer = FString(jsonString->c_str());
+			google::protobuf::util::windows::DeleteString(jsonString);
+		}
 	}
 	httpRequest_->SetContentAsString(stringBuffer);
 	return true;
