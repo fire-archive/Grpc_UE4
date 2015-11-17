@@ -49,6 +49,8 @@ namespace google {
 namespace protobuf {
 namespace util {
 namespace windows {
+
+// N.B. The DynamicMessageFactory must outlive any descriptors it creates.
 static DynamicMessageFactory Sdynamic_message_factory;
 
 Status SerializeToJsonString(TypeResolver* resolver, const string& type_url, const string& binary_input,
@@ -72,7 +74,6 @@ bool SerializeToTextString(const Message& message, string** text_output) {
 	return true;
 }
 
-
 void SerializeToBinaryString(const Message& message, string** binary_output) {
 	*binary_output = new string(message.SerializeAsString());
 }
@@ -91,8 +92,7 @@ bool ParseFromJsonString(const Descriptor* descriptor,
 }
 
 bool ParseFromTextString(const Descriptor* descriptor, const string&text_string, Message** message_output) {
-	DynamicMessageFactory dmf;
-	*message_output = dmf.GetPrototype(descriptor)->New();
+	*message_output = Sdynamic_message_factory.GetPrototype(descriptor)->New();
 	if (!google::protobuf::TextFormat::ParseFromString(text_string, *message_output)) {
 		delete *message_output;
 		*message_output = nullptr;
@@ -102,8 +102,7 @@ bool ParseFromTextString(const Descriptor* descriptor, const string&text_string,
 }
 
 bool ParseFromBinary(const Descriptor* descriptor, const string& binary_input, Message** message_output) {
-	DynamicMessageFactory dmf;
-	*message_output = dmf.GetPrototype(descriptor)->New();
+	*message_output = Sdynamic_message_factory.GetPrototype(descriptor)->New();
 	if (!(*message_output)->ParseFromString(binary_input)) {
 		delete *message_output;
 		return false;
