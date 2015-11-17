@@ -5,16 +5,19 @@ The goal of this project is to provide libraries and samples which can be used t
 integrate into projects for the purpose of allowing UnrealEngine based clients and
 servers to seamlessly communicate with the Google Cloud Platform.
 
-Contents:
-
-protobuf-3.0.0-beta-1-ue4/           - Googles proto3 source with mods for Windows/UE4.
-protobuf-3.0.0-beta-1-ue4-binaries/  - Binaries built from the above.
-example_protos/                      - Example protos for a game 'session' service.
-ProtoRPC_UE4/                        - UE4 project which contains the RPC code and an
-                                       example of how to use protos via the sample protos.
-appengine/                           - AppEngine service (JAVA) which contains a
-                                       vendorized proto3 .JAR and an example server for
-				       the sample app.
+CONTENTS;
+  - protobuf-3.0.0-beta-1-ue4/
+    - Googles proto3 source with mods for Windows/UE4.
+  - protobuf-3.0.0-beta-1-ue4-binaries/
+    - Binaries built from the above.
+  - example_protos/ 
+    - Example protos for a game 'session' service.
+  - ProtoRPC_UE4/
+    - UE4 project which contains the RPC code and an example of how to use
+      protos via the sample protos.
+  - appengine/
+    - AppEngine service (JAVA) which contains a vendorized proto3 .JAr and
+      an example server for the sample app.
 
 TODO:
   - Add proto3 binaries for XBox/PS4.
