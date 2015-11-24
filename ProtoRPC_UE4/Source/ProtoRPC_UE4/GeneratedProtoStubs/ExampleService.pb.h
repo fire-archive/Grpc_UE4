@@ -31,7 +31,8 @@
 #include "ExampleCharacter.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace example_proto {
+namespace com {
+namespace paddlecreekgames {
 
 // Internal implementation detail -- do not call these.
 void protobuf_AddDesc_ExampleService_2eproto();
@@ -123,7 +124,7 @@ class AuthRequest : public ::google::protobuf::Message {
   ::std::string* release_hash();
   void set_allocated_hash(::std::string* hash);
 
-  // @@protoc_insertion_point(class_scope:example_proto.AuthRequest)
+  // @@protoc_insertion_point(class_scope:com.paddlecreekgames.AuthRequest)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -207,22 +208,22 @@ class SuccessfullAuthResponse : public ::google::protobuf::Message {
   ::std::string* release_authtoken();
   void set_allocated_authtoken(::std::string* authtoken);
 
-  // optional .example_proto.ExampleCharacter CharacterInfo = 2;
+  // optional .com.paddlecreekgames.ExampleCharacter CharacterInfo = 2;
   bool has_characterinfo() const;
   void clear_characterinfo();
   static const int kCharacterInfoFieldNumber = 2;
-  const ::example_proto::ExampleCharacter& characterinfo() const;
-  ::example_proto::ExampleCharacter* mutable_characterinfo();
-  ::example_proto::ExampleCharacter* release_characterinfo();
-  void set_allocated_characterinfo(::example_proto::ExampleCharacter* characterinfo);
+  const ::com::paddlecreekgames::ExampleCharacter& characterinfo() const;
+  ::com::paddlecreekgames::ExampleCharacter* mutable_characterinfo();
+  ::com::paddlecreekgames::ExampleCharacter* release_characterinfo();
+  void set_allocated_characterinfo(::com::paddlecreekgames::ExampleCharacter* characterinfo);
 
-  // @@protoc_insertion_point(class_scope:example_proto.SuccessfullAuthResponse)
+  // @@protoc_insertion_point(class_scope:com.paddlecreekgames.SuccessfullAuthResponse)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr authtoken_;
-  ::example_proto::ExampleCharacter* characterinfo_;
+  ::com::paddlecreekgames::ExampleCharacter* characterinfo_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_ExampleService_2eproto();
   friend void protobuf_AssignDesc_ExampleService_2eproto();
@@ -300,7 +301,7 @@ class FailedAuthResponse : public ::google::protobuf::Message {
   ::std::string* release_errormessage();
   void set_allocated_errormessage(::std::string* errormessage);
 
-  // @@protoc_insertion_point(class_scope:example_proto.FailedAuthResponse)
+  // @@protoc_insertion_point(class_scope:com.paddlecreekgames.FailedAuthResponse)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -378,26 +379,26 @@ class AuthResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .example_proto.SuccessfullAuthResponse SuccessfullAuthData = 1;
+  // optional .com.paddlecreekgames.SuccessfullAuthResponse SuccessfullAuthData = 1;
   bool has_successfullauthdata() const;
   void clear_successfullauthdata();
   static const int kSuccessfullAuthDataFieldNumber = 1;
-  const ::example_proto::SuccessfullAuthResponse& successfullauthdata() const;
-  ::example_proto::SuccessfullAuthResponse* mutable_successfullauthdata();
-  ::example_proto::SuccessfullAuthResponse* release_successfullauthdata();
-  void set_allocated_successfullauthdata(::example_proto::SuccessfullAuthResponse* successfullauthdata);
+  const ::com::paddlecreekgames::SuccessfullAuthResponse& successfullauthdata() const;
+  ::com::paddlecreekgames::SuccessfullAuthResponse* mutable_successfullauthdata();
+  ::com::paddlecreekgames::SuccessfullAuthResponse* release_successfullauthdata();
+  void set_allocated_successfullauthdata(::com::paddlecreekgames::SuccessfullAuthResponse* successfullauthdata);
 
-  // optional .example_proto.FailedAuthResponse FailedAuthData = 2;
+  // optional .com.paddlecreekgames.FailedAuthResponse FailedAuthData = 2;
   bool has_failedauthdata() const;
   void clear_failedauthdata();
   static const int kFailedAuthDataFieldNumber = 2;
-  const ::example_proto::FailedAuthResponse& failedauthdata() const;
-  ::example_proto::FailedAuthResponse* mutable_failedauthdata();
-  ::example_proto::FailedAuthResponse* release_failedauthdata();
-  void set_allocated_failedauthdata(::example_proto::FailedAuthResponse* failedauthdata);
+  const ::com::paddlecreekgames::FailedAuthResponse& failedauthdata() const;
+  ::com::paddlecreekgames::FailedAuthResponse* mutable_failedauthdata();
+  ::com::paddlecreekgames::FailedAuthResponse* release_failedauthdata();
+  void set_allocated_failedauthdata(::com::paddlecreekgames::FailedAuthResponse* failedauthdata);
 
   AuthResponseOneofCase AuthResponse_Oneof_case() const;
-  // @@protoc_insertion_point(class_scope:example_proto.AuthResponse)
+  // @@protoc_insertion_point(class_scope:com.paddlecreekgames.AuthResponse)
  private:
   inline void set_has_successfullauthdata();
   inline void set_has_failedauthdata();
@@ -410,8 +411,8 @@ class AuthResponse : public ::google::protobuf::Message {
   bool _is_default_instance_;
   union AuthResponseOneofUnion {
     AuthResponseOneofUnion() {}
-    ::example_proto::SuccessfullAuthResponse* successfullauthdata_;
-    ::example_proto::FailedAuthResponse* failedauthdata_;
+    ::com::paddlecreekgames::SuccessfullAuthResponse* successfullauthdata_;
+    ::com::paddlecreekgames::FailedAuthResponse* failedauthdata_;
   } AuthResponse_Oneof_;
   mutable int _cached_size_;
   ::google::protobuf::uint32 _oneof_case_[1];
@@ -439,8 +440,8 @@ class AuthService : public ::google::protobuf::Service {
   static const ::google::protobuf::ServiceDescriptor* descriptor();
 
   virtual void Authenticate(::google::protobuf::RpcController* controller,
-                       const ::example_proto::AuthRequest* request,
-                       ::example_proto::AuthResponse* response,
+                       const ::com::paddlecreekgames::AuthRequest* request,
+                       ::com::paddlecreekgames::AuthResponse* response,
                        ::google::protobuf::Closure* done);
 
   // implements Service ----------------------------------------------
@@ -472,8 +473,8 @@ class AuthService_Stub : public AuthService {
   // implements AuthService ------------------------------------------
 
   void Authenticate(::google::protobuf::RpcController* controller,
-                       const ::example_proto::AuthRequest* request,
-                       ::example_proto::AuthResponse* response,
+                       const ::com::paddlecreekgames::AuthRequest* request,
+                       ::com::paddlecreekgames::AuthResponse* response,
                        ::google::protobuf::Closure* done);
  private:
   ::google::protobuf::RpcChannel* channel_;
@@ -495,28 +496,28 @@ inline void AuthRequest::clear_username() {
   username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& AuthRequest::username() const {
-  // @@protoc_insertion_point(field_get:example_proto.AuthRequest.Username)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.AuthRequest.Username)
   return username_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void AuthRequest::set_username(const ::std::string& value) {
   
   username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:example_proto.AuthRequest.Username)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.AuthRequest.Username)
 }
 inline void AuthRequest::set_username(const char* value) {
   
   username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_proto.AuthRequest.Username)
+  // @@protoc_insertion_point(field_set_char:com.paddlecreekgames.AuthRequest.Username)
 }
 inline void AuthRequest::set_username(const char* value, size_t size) {
   
   username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_proto.AuthRequest.Username)
+  // @@protoc_insertion_point(field_set_pointer:com.paddlecreekgames.AuthRequest.Username)
 }
 inline ::std::string* AuthRequest::mutable_username() {
   
-  // @@protoc_insertion_point(field_mutable:example_proto.AuthRequest.Username)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.AuthRequest.Username)
   return username_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* AuthRequest::release_username() {
@@ -530,7 +531,7 @@ inline void AuthRequest::set_allocated_username(::std::string* username) {
     
   }
   username_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username);
-  // @@protoc_insertion_point(field_set_allocated:example_proto.AuthRequest.Username)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.AuthRequest.Username)
 }
 
 // optional string Hash = 2;
@@ -538,28 +539,28 @@ inline void AuthRequest::clear_hash() {
   hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& AuthRequest::hash() const {
-  // @@protoc_insertion_point(field_get:example_proto.AuthRequest.Hash)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.AuthRequest.Hash)
   return hash_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void AuthRequest::set_hash(const ::std::string& value) {
   
   hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:example_proto.AuthRequest.Hash)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.AuthRequest.Hash)
 }
 inline void AuthRequest::set_hash(const char* value) {
   
   hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_proto.AuthRequest.Hash)
+  // @@protoc_insertion_point(field_set_char:com.paddlecreekgames.AuthRequest.Hash)
 }
 inline void AuthRequest::set_hash(const char* value, size_t size) {
   
   hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_proto.AuthRequest.Hash)
+  // @@protoc_insertion_point(field_set_pointer:com.paddlecreekgames.AuthRequest.Hash)
 }
 inline ::std::string* AuthRequest::mutable_hash() {
   
-  // @@protoc_insertion_point(field_mutable:example_proto.AuthRequest.Hash)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.AuthRequest.Hash)
   return hash_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* AuthRequest::release_hash() {
@@ -573,7 +574,7 @@ inline void AuthRequest::set_allocated_hash(::std::string* hash) {
     
   }
   hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hash);
-  // @@protoc_insertion_point(field_set_allocated:example_proto.AuthRequest.Hash)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.AuthRequest.Hash)
 }
 
 // -------------------------------------------------------------------
@@ -585,28 +586,28 @@ inline void SuccessfullAuthResponse::clear_authtoken() {
   authtoken_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& SuccessfullAuthResponse::authtoken() const {
-  // @@protoc_insertion_point(field_get:example_proto.SuccessfullAuthResponse.AuthToken)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.SuccessfullAuthResponse.AuthToken)
   return authtoken_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void SuccessfullAuthResponse::set_authtoken(const ::std::string& value) {
   
   authtoken_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:example_proto.SuccessfullAuthResponse.AuthToken)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.SuccessfullAuthResponse.AuthToken)
 }
 inline void SuccessfullAuthResponse::set_authtoken(const char* value) {
   
   authtoken_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_proto.SuccessfullAuthResponse.AuthToken)
+  // @@protoc_insertion_point(field_set_char:com.paddlecreekgames.SuccessfullAuthResponse.AuthToken)
 }
 inline void SuccessfullAuthResponse::set_authtoken(const char* value, size_t size) {
   
   authtoken_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_proto.SuccessfullAuthResponse.AuthToken)
+  // @@protoc_insertion_point(field_set_pointer:com.paddlecreekgames.SuccessfullAuthResponse.AuthToken)
 }
 inline ::std::string* SuccessfullAuthResponse::mutable_authtoken() {
   
-  // @@protoc_insertion_point(field_mutable:example_proto.SuccessfullAuthResponse.AuthToken)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.SuccessfullAuthResponse.AuthToken)
   return authtoken_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* SuccessfullAuthResponse::release_authtoken() {
@@ -620,10 +621,10 @@ inline void SuccessfullAuthResponse::set_allocated_authtoken(::std::string* auth
     
   }
   authtoken_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), authtoken);
-  // @@protoc_insertion_point(field_set_allocated:example_proto.SuccessfullAuthResponse.AuthToken)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.SuccessfullAuthResponse.AuthToken)
 }
 
-// optional .example_proto.ExampleCharacter CharacterInfo = 2;
+// optional .com.paddlecreekgames.ExampleCharacter CharacterInfo = 2;
 inline bool SuccessfullAuthResponse::has_characterinfo() const {
   return !_is_default_instance_ && characterinfo_ != NULL;
 }
@@ -631,25 +632,25 @@ inline void SuccessfullAuthResponse::clear_characterinfo() {
   if (GetArenaNoVirtual() == NULL && characterinfo_ != NULL) delete characterinfo_;
   characterinfo_ = NULL;
 }
-inline const ::example_proto::ExampleCharacter& SuccessfullAuthResponse::characterinfo() const {
-  // @@protoc_insertion_point(field_get:example_proto.SuccessfullAuthResponse.CharacterInfo)
+inline const ::com::paddlecreekgames::ExampleCharacter& SuccessfullAuthResponse::characterinfo() const {
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.SuccessfullAuthResponse.CharacterInfo)
   return characterinfo_ != NULL ? *characterinfo_ : *default_instance_->characterinfo_;
 }
-inline ::example_proto::ExampleCharacter* SuccessfullAuthResponse::mutable_characterinfo() {
+inline ::com::paddlecreekgames::ExampleCharacter* SuccessfullAuthResponse::mutable_characterinfo() {
   
   if (characterinfo_ == NULL) {
-    characterinfo_ = new ::example_proto::ExampleCharacter;
+    characterinfo_ = new ::com::paddlecreekgames::ExampleCharacter;
   }
-  // @@protoc_insertion_point(field_mutable:example_proto.SuccessfullAuthResponse.CharacterInfo)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.SuccessfullAuthResponse.CharacterInfo)
   return characterinfo_;
 }
-inline ::example_proto::ExampleCharacter* SuccessfullAuthResponse::release_characterinfo() {
+inline ::com::paddlecreekgames::ExampleCharacter* SuccessfullAuthResponse::release_characterinfo() {
   
-  ::example_proto::ExampleCharacter* temp = characterinfo_;
+  ::com::paddlecreekgames::ExampleCharacter* temp = characterinfo_;
   characterinfo_ = NULL;
   return temp;
 }
-inline void SuccessfullAuthResponse::set_allocated_characterinfo(::example_proto::ExampleCharacter* characterinfo) {
+inline void SuccessfullAuthResponse::set_allocated_characterinfo(::com::paddlecreekgames::ExampleCharacter* characterinfo) {
   delete characterinfo_;
   characterinfo_ = characterinfo;
   if (characterinfo) {
@@ -657,7 +658,7 @@ inline void SuccessfullAuthResponse::set_allocated_characterinfo(::example_proto
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:example_proto.SuccessfullAuthResponse.CharacterInfo)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.SuccessfullAuthResponse.CharacterInfo)
 }
 
 // -------------------------------------------------------------------
@@ -669,28 +670,28 @@ inline void FailedAuthResponse::clear_errormessage() {
   errormessage_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& FailedAuthResponse::errormessage() const {
-  // @@protoc_insertion_point(field_get:example_proto.FailedAuthResponse.ErrorMessage)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.FailedAuthResponse.ErrorMessage)
   return errormessage_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void FailedAuthResponse::set_errormessage(const ::std::string& value) {
   
   errormessage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:example_proto.FailedAuthResponse.ErrorMessage)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.FailedAuthResponse.ErrorMessage)
 }
 inline void FailedAuthResponse::set_errormessage(const char* value) {
   
   errormessage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_proto.FailedAuthResponse.ErrorMessage)
+  // @@protoc_insertion_point(field_set_char:com.paddlecreekgames.FailedAuthResponse.ErrorMessage)
 }
 inline void FailedAuthResponse::set_errormessage(const char* value, size_t size) {
   
   errormessage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_proto.FailedAuthResponse.ErrorMessage)
+  // @@protoc_insertion_point(field_set_pointer:com.paddlecreekgames.FailedAuthResponse.ErrorMessage)
 }
 inline ::std::string* FailedAuthResponse::mutable_errormessage() {
   
-  // @@protoc_insertion_point(field_mutable:example_proto.FailedAuthResponse.ErrorMessage)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.FailedAuthResponse.ErrorMessage)
   return errormessage_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* FailedAuthResponse::release_errormessage() {
@@ -704,14 +705,14 @@ inline void FailedAuthResponse::set_allocated_errormessage(::std::string* errorm
     
   }
   errormessage_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), errormessage);
-  // @@protoc_insertion_point(field_set_allocated:example_proto.FailedAuthResponse.ErrorMessage)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.FailedAuthResponse.ErrorMessage)
 }
 
 // -------------------------------------------------------------------
 
 // AuthResponse
 
-// optional .example_proto.SuccessfullAuthResponse SuccessfullAuthData = 1;
+// optional .com.paddlecreekgames.SuccessfullAuthResponse SuccessfullAuthData = 1;
 inline bool AuthResponse::has_successfullauthdata() const {
   return AuthResponse_Oneof_case() == kSuccessfullAuthData;
 }
@@ -724,41 +725,41 @@ inline void AuthResponse::clear_successfullauthdata() {
     clear_has_AuthResponse_Oneof();
   }
 }
-inline  const ::example_proto::SuccessfullAuthResponse& AuthResponse::successfullauthdata() const {
-  // @@protoc_insertion_point(field_get:example_proto.AuthResponse.SuccessfullAuthData)
+inline  const ::com::paddlecreekgames::SuccessfullAuthResponse& AuthResponse::successfullauthdata() const {
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.AuthResponse.SuccessfullAuthData)
   return has_successfullauthdata()
       ? *AuthResponse_Oneof_.successfullauthdata_
-      : ::example_proto::SuccessfullAuthResponse::default_instance();
+      : ::com::paddlecreekgames::SuccessfullAuthResponse::default_instance();
 }
-inline ::example_proto::SuccessfullAuthResponse* AuthResponse::mutable_successfullauthdata() {
+inline ::com::paddlecreekgames::SuccessfullAuthResponse* AuthResponse::mutable_successfullauthdata() {
   if (!has_successfullauthdata()) {
     clear_AuthResponse_Oneof();
     set_has_successfullauthdata();
-    AuthResponse_Oneof_.successfullauthdata_ = new ::example_proto::SuccessfullAuthResponse;
+    AuthResponse_Oneof_.successfullauthdata_ = new ::com::paddlecreekgames::SuccessfullAuthResponse;
   }
-  // @@protoc_insertion_point(field_mutable:example_proto.AuthResponse.SuccessfullAuthData)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.AuthResponse.SuccessfullAuthData)
   return AuthResponse_Oneof_.successfullauthdata_;
 }
-inline ::example_proto::SuccessfullAuthResponse* AuthResponse::release_successfullauthdata() {
+inline ::com::paddlecreekgames::SuccessfullAuthResponse* AuthResponse::release_successfullauthdata() {
   if (has_successfullauthdata()) {
     clear_has_AuthResponse_Oneof();
-    ::example_proto::SuccessfullAuthResponse* temp = AuthResponse_Oneof_.successfullauthdata_;
+    ::com::paddlecreekgames::SuccessfullAuthResponse* temp = AuthResponse_Oneof_.successfullauthdata_;
     AuthResponse_Oneof_.successfullauthdata_ = NULL;
     return temp;
   } else {
     return NULL;
   }
 }
-inline void AuthResponse::set_allocated_successfullauthdata(::example_proto::SuccessfullAuthResponse* successfullauthdata) {
+inline void AuthResponse::set_allocated_successfullauthdata(::com::paddlecreekgames::SuccessfullAuthResponse* successfullauthdata) {
   clear_AuthResponse_Oneof();
   if (successfullauthdata) {
     set_has_successfullauthdata();
     AuthResponse_Oneof_.successfullauthdata_ = successfullauthdata;
   }
-  // @@protoc_insertion_point(field_set_allocated:example_proto.AuthResponse.SuccessfullAuthData)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.AuthResponse.SuccessfullAuthData)
 }
 
-// optional .example_proto.FailedAuthResponse FailedAuthData = 2;
+// optional .com.paddlecreekgames.FailedAuthResponse FailedAuthData = 2;
 inline bool AuthResponse::has_failedauthdata() const {
   return AuthResponse_Oneof_case() == kFailedAuthData;
 }
@@ -771,38 +772,38 @@ inline void AuthResponse::clear_failedauthdata() {
     clear_has_AuthResponse_Oneof();
   }
 }
-inline  const ::example_proto::FailedAuthResponse& AuthResponse::failedauthdata() const {
-  // @@protoc_insertion_point(field_get:example_proto.AuthResponse.FailedAuthData)
+inline  const ::com::paddlecreekgames::FailedAuthResponse& AuthResponse::failedauthdata() const {
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.AuthResponse.FailedAuthData)
   return has_failedauthdata()
       ? *AuthResponse_Oneof_.failedauthdata_
-      : ::example_proto::FailedAuthResponse::default_instance();
+      : ::com::paddlecreekgames::FailedAuthResponse::default_instance();
 }
-inline ::example_proto::FailedAuthResponse* AuthResponse::mutable_failedauthdata() {
+inline ::com::paddlecreekgames::FailedAuthResponse* AuthResponse::mutable_failedauthdata() {
   if (!has_failedauthdata()) {
     clear_AuthResponse_Oneof();
     set_has_failedauthdata();
-    AuthResponse_Oneof_.failedauthdata_ = new ::example_proto::FailedAuthResponse;
+    AuthResponse_Oneof_.failedauthdata_ = new ::com::paddlecreekgames::FailedAuthResponse;
   }
-  // @@protoc_insertion_point(field_mutable:example_proto.AuthResponse.FailedAuthData)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.AuthResponse.FailedAuthData)
   return AuthResponse_Oneof_.failedauthdata_;
 }
-inline ::example_proto::FailedAuthResponse* AuthResponse::release_failedauthdata() {
+inline ::com::paddlecreekgames::FailedAuthResponse* AuthResponse::release_failedauthdata() {
   if (has_failedauthdata()) {
     clear_has_AuthResponse_Oneof();
-    ::example_proto::FailedAuthResponse* temp = AuthResponse_Oneof_.failedauthdata_;
+    ::com::paddlecreekgames::FailedAuthResponse* temp = AuthResponse_Oneof_.failedauthdata_;
     AuthResponse_Oneof_.failedauthdata_ = NULL;
     return temp;
   } else {
     return NULL;
   }
 }
-inline void AuthResponse::set_allocated_failedauthdata(::example_proto::FailedAuthResponse* failedauthdata) {
+inline void AuthResponse::set_allocated_failedauthdata(::com::paddlecreekgames::FailedAuthResponse* failedauthdata) {
   clear_AuthResponse_Oneof();
   if (failedauthdata) {
     set_has_failedauthdata();
     AuthResponse_Oneof_.failedauthdata_ = failedauthdata;
   }
-  // @@protoc_insertion_point(field_set_allocated:example_proto.AuthResponse.FailedAuthData)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.AuthResponse.FailedAuthData)
 }
 
 inline bool AuthResponse::has_AuthResponse_Oneof() const {
@@ -824,7 +825,8 @@ inline AuthResponse::AuthResponseOneofCase AuthResponse::AuthResponse_Oneof_case
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace example_proto
+}  // namespace paddlecreekgames
+}  // namespace com
 
 // @@protoc_insertion_point(global_scope)
 

@@ -7,10 +7,11 @@
 syntax="proto3";
 
 // The package ends up being the c++ namespace. Ie: ::example_proto:
-package example_proto;
+package com.paddlecreekgames;
 
 // Instructs the proto compiler to generate service stubs.
 option cc_generic_services = true;
+option java_generic_services = true;
 
 // Import definitions for our character from another proto.
 import "ExampleCharacter.proto";

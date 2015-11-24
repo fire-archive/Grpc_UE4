@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/protobuf-java-3.0.0-beta-1.jar" sourcepath="C:/Users/San/Documents/UnrealProjects/Proto3RPC_UE4/protobuf-java-3.0.0-beta-1/protobuf-3.0.0-beta-1"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

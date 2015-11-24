@@ -29,7 +29,8 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace example_proto {
+namespace com {
+namespace paddlecreekgames {
 
 // Internal implementation detail -- do not call these.
 void protobuf_AddDesc_ExampleCharacter_2eproto();
@@ -130,7 +131,7 @@ class ExampleCharacter : public ::google::protobuf::Message {
   ::google::protobuf::int64 armor() const;
   void set_armor(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:example_proto.ExampleCharacter)
+  // @@protoc_insertion_point(class_scope:com.paddlecreekgames.ExampleCharacter)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -160,28 +161,28 @@ inline void ExampleCharacter::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& ExampleCharacter::id() const {
-  // @@protoc_insertion_point(field_get:example_proto.ExampleCharacter.Id)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.ExampleCharacter.Id)
   return id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void ExampleCharacter::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:example_proto.ExampleCharacter.Id)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.ExampleCharacter.Id)
 }
 inline void ExampleCharacter::set_id(const char* value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_proto.ExampleCharacter.Id)
+  // @@protoc_insertion_point(field_set_char:com.paddlecreekgames.ExampleCharacter.Id)
 }
 inline void ExampleCharacter::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_proto.ExampleCharacter.Id)
+  // @@protoc_insertion_point(field_set_pointer:com.paddlecreekgames.ExampleCharacter.Id)
 }
 inline ::std::string* ExampleCharacter::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:example_proto.ExampleCharacter.Id)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.ExampleCharacter.Id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* ExampleCharacter::release_id() {
@@ -195,7 +196,7 @@ inline void ExampleCharacter::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:example_proto.ExampleCharacter.Id)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.ExampleCharacter.Id)
 }
 
 // optional string Name = 2;
@@ -203,28 +204,28 @@ inline void ExampleCharacter::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& ExampleCharacter::name() const {
-  // @@protoc_insertion_point(field_get:example_proto.ExampleCharacter.Name)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.ExampleCharacter.Name)
   return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void ExampleCharacter::set_name(const ::std::string& value) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:example_proto.ExampleCharacter.Name)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.ExampleCharacter.Name)
 }
 inline void ExampleCharacter::set_name(const char* value) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:example_proto.ExampleCharacter.Name)
+  // @@protoc_insertion_point(field_set_char:com.paddlecreekgames.ExampleCharacter.Name)
 }
 inline void ExampleCharacter::set_name(const char* value, size_t size) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:example_proto.ExampleCharacter.Name)
+  // @@protoc_insertion_point(field_set_pointer:com.paddlecreekgames.ExampleCharacter.Name)
 }
 inline ::std::string* ExampleCharacter::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:example_proto.ExampleCharacter.Name)
+  // @@protoc_insertion_point(field_mutable:com.paddlecreekgames.ExampleCharacter.Name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* ExampleCharacter::release_name() {
@@ -238,7 +239,7 @@ inline void ExampleCharacter::set_allocated_name(::std::string* name) {
     
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:example_proto.ExampleCharacter.Name)
+  // @@protoc_insertion_point(field_set_allocated:com.paddlecreekgames.ExampleCharacter.Name)
 }
 
 // optional int64 Health = 3;
@@ -246,13 +247,13 @@ inline void ExampleCharacter::clear_health() {
   health_ = GOOGLE_LONGLONG(0);
 }
 inline ::google::protobuf::int64 ExampleCharacter::health() const {
-  // @@protoc_insertion_point(field_get:example_proto.ExampleCharacter.Health)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.ExampleCharacter.Health)
   return health_;
 }
 inline void ExampleCharacter::set_health(::google::protobuf::int64 value) {
   
   health_ = value;
-  // @@protoc_insertion_point(field_set:example_proto.ExampleCharacter.Health)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.ExampleCharacter.Health)
 }
 
 // optional int64 Armor = 4;
@@ -260,20 +261,21 @@ inline void ExampleCharacter::clear_armor() {
   armor_ = GOOGLE_LONGLONG(0);
 }
 inline ::google::protobuf::int64 ExampleCharacter::armor() const {
-  // @@protoc_insertion_point(field_get:example_proto.ExampleCharacter.Armor)
+  // @@protoc_insertion_point(field_get:com.paddlecreekgames.ExampleCharacter.Armor)
   return armor_;
 }
 inline void ExampleCharacter::set_armor(::google::protobuf::int64 value) {
   
   armor_ = value;
-  // @@protoc_insertion_point(field_set:example_proto.ExampleCharacter.Armor)
+  // @@protoc_insertion_point(field_set:com.paddlecreekgames.ExampleCharacter.Armor)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace example_proto
+}  // namespace paddlecreekgames
+}  // namespace com
 
 // @@protoc_insertion_point(global_scope)
 

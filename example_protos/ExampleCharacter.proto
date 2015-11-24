@@ -7,7 +7,7 @@
 syntax="proto3";
 
 // The package ends up being the c++ namespace. Ie: ::example_proto:
-package example_proto;
+package com.paddlecreekgames;
 
 // A very simple definition for a character.
 message ExampleCharacter {
