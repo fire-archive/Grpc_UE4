@@ -12,10 +12,13 @@ import com.google.protobuf.BlockingService;
 import com.google.protobuf.Descriptors.MethodDescriptor;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.ServiceException;
+import com.google.protobuf.TextFormat;
 import com.paddlecreekgames.ExampleService;
 import com.paddlecreekgames.ExampleService.AuthService;
 import com.paddlecreekgames.protobuf.RpcControllerImpl;
 import com.google.protobuf.Message;
+import com.google.protobuf.util.JsonFormat;
+import com.google.protobuf.Message.Builder;
 
 
 @SuppressWarnings("serial")
@@ -39,6 +42,7 @@ public class Appengine_auth_svcServlet extends HttpServlet {
 			resp.sendError(500, "Unknown method");
 			return;
 		}
+		Builder requestProtoBuilder = blockingSvc.getRequestPrototype(method).toBuilder();
 		
 		// Decode the request protobuf based on the content-type.
 		Message requestProto = null;
@@ -50,32 +54,59 @@ public class Appengine_auth_svcServlet extends HttpServlet {
 				CharBuffer charBuffer = CharBuffer.wrap(charArray);
 				ByteBuffer byteBuffer = Charset.forName("UTF-8").encode(charBuffer);
 				byte[] byteArray = Arrays.copyOfRange(byteBuffer.array(), byteBuffer.position(),  byteBuffer.limit());
-				requestProto = blockingSvc.getRequestPrototype(method).toBuilder().mergeFrom(byteArray).build();
+				requestProtoBuilder.mergeFrom(byteArray);
+				break;
 			} catch (InvalidProtocolBufferException e) {
 				resp.sendError(500, "Bad request");
 				return;
 			}
-			break;
 		case "application/x-protobuf-text":
-			break;
+			try {
+				TextFormat.getParser().merge(req.getReader(), requestProtoBuilder);
+				break;
+			}
+			catch (IOException e) {
+				resp.sendError(500, "Bad request");
+				return;
+			}
+			
 		case "application/json":
-			break;
+			try {
+				JsonFormat.parser().merge(req.getReader(), requestProtoBuilder);
+				break;
+			} catch (InvalidProtocolBufferException e) {
+				resp.sendError(500, "Bad request");
+				return;
+			}
 		default:
 			resp.sendError(500,  "Unsupported request format");
 			return;
 		}
 		
+		requestProto = requestProtoBuilder.build();
+		
 		// Dispatch the request to the appropriate handler.
 		RpcControllerImpl controller = new RpcControllerImpl();
-		Message response = null;
+		Message responseProto = null;
 		try {
-			response = blockingSvc.callBlockingMethod(method, controller, requestProto);
+			responseProto = blockingSvc.callBlockingMethod(method, controller, requestProto);
 		} catch (ServiceException e) {
 			resp.sendError(500, "Request failed (" + e.toString() + ")");
 			return;
 		}
 		
 		// Encode the response protobuf based on the request content-type.
-		
+		resp.setContentType(req.getContentType());
+		switch (req.getContentType().toLowerCase()) {
+		case "application/x-protobuf":
+			break;
+		case "application/x-protobuf-text":
+			break;
+		case "application/json":
+			break;
+		default:
+			resp.sendError(500,  "Wat?");
+			return;
+		}
 	}
 }
