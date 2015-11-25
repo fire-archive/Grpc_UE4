@@ -11,7 +11,7 @@ AMyActor::AMyActor() {
 
 void AMyActor::BeginPlay() {
 	Super::BeginPlay();
-	sessionManager_.StartAuthentication("san", "meh", &authDelegate_);
+	sessionManager_.StartAuthentication("san", "some_secure_hash", &authDelegate_);
 }
 
 // Called every frame

@@ -154,7 +154,8 @@ void HttpRpcRequest::onHttpRequestCompleted(FHttpRequestPtr request, FHttpRespon
 		case 200:
 			break;
 		default:
-			UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP response code %d"), response->GetResponseCode());
+			UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP response code %d (%s)"), response->GetResponseCode(),
+				   *response->GetContentAsString());
 			break;
 		}
 	}

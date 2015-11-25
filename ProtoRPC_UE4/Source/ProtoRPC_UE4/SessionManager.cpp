@@ -11,7 +11,7 @@
 
 SessionManager::SessionManager()
     : sessionState_(SessionState::SS_NotAuthenticated),
-	  channel_(new HttpRpcChannel("http://127.0.0.1:8080/rpc")),
+	  channel_(new HttpRpcChannel("http://1-dot-pcg-login.appspot.com/appengine_auth_svc")),
       controller_(new HttpRpcController()),
       authService_(new com::paddlecreekgames::AuthService::Stub(channel_)),
 	  authRequest_(new com::paddlecreekgames::AuthRequest()),

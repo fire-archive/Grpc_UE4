@@ -41,7 +41,7 @@ HttpRpcChannel::~HttpRpcChannel() {}
 void HttpRpcChannel::CallMethod(const MethodDescriptor* method, RpcController* controller, const Message* request, Message* response, Closure* done) {
 	int64 requestId = FPlatformAtomics::InterlockedIncrement(&nextRequestId_);
 	HttpRpcRequest* newRequest = new HttpRpcRequest(
-		HttpRpcRequestStrategy::HRRS_JSON, typeResolver_, requestId, serviceUri_, method, controller, request, response, done);
+		HttpRpcRequestStrategy::HRRS_PROTOASCII, typeResolver_, requestId, serviceUri_, method, controller, request, response, done);
 	{
 		FScopeLock mutexLock(&outstandingRequestsLock_);
 		outstandingRequests_.Add(requestId, newRequest);
