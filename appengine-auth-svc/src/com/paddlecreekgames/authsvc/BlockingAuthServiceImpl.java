@@ -14,7 +14,7 @@ public class BlockingAuthServiceImpl implements BlockingInterface {
 	public AuthResponse authenticate(RpcController controller,
 			AuthRequest request) throws ServiceException {
 		AuthResponse response = null;
-		if (request.getUsername() == "san" && request.getHash() == "some_secure_hash") {
+		if (request.getUsername().equals("san") && request.getHash().equals("some_secure_hash")) {
 			response = AuthResponse.newBuilder().setSuccessfullAuthData(SuccessfullAuthResponse.newBuilder().setAuthToken("auth_token").build()).build();
 		} else {
 			response = AuthResponse.newBuilder().setFailedAuthData(FailedAuthResponse.newBuilder().setErrorMessage("authentication failed").build()).build();
