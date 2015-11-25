@@ -42,8 +42,8 @@ HttpRpcRequest::HttpRpcRequest(
 	  requestStrategy_(RequestStrategy) {
 	httpRequest_->SetVerb(TEXT("POST"));
 	httpRequest_->SetURL(ServiceUri);
-	httpRequest_->SetHeader("Content-Type", "application/json");
 	httpRequest_->SetHeader("X-Request-ID", FString::Printf(TEXT("%u"), RequestId));
+	httpRequest_->SetHeader("X-Method", FString(Method->name().c_str()));
 }
 
 HttpRpcRequest::~HttpRpcRequest() {
@@ -75,13 +75,32 @@ bool HttpRpcRequest::Init() {
 }
 
 bool HttpRpcRequest::SerializeAsProtoASCII() {
-	callState_.GetController()->SetFailed("Not implemented");
-	return false;
+	std::string* textString = nullptr;
+	google::protobuf::util::windows::SerializeToTextString(*callState_.GetRequest(), &textString);
+	if (textString == nullptr) {
+		UE_LOG(HttpRpcRequestLog, Error, TEXT("Failed to serialize to text"));
+		callState_.GetController()->SetFailed("Text serialization failed");
+		return false;
+	}
+	httpRequest_->SetContentAsString(FString(textString->c_str()));
+	google::protobuf::util::windows::DeleteString(textString);
+	httpRequest_->SetHeader("Content-Type", "application/x-protobuf-text");
+	return true;
 }
 
 bool HttpRpcRequest::SerializeAsProtoBinary() {
-	callState_.GetController()->SetFailed("Not implemented");
-	return false;
+	std::string* binaryString = nullptr;
+	google::protobuf::util::windows::SerializeToBinaryString(*callState_.GetRequest(), &binaryString);
+	if (binaryString == nullptr) {
+		UE_LOG(HttpRpcRequestLog, Error, TEXT("Failed to serialize to binary"));
+		callState_.GetController()->SetFailed("Binary serialization failed");
+		return false;
+	}
+	httpRequest_->SetContentAsString(FString(binaryString->c_str()));
+	google::protobuf::util::windows::DeleteString(binaryString);
+
+	httpRequest_->SetHeader("Content-Type", "application/x-protobuf");
+	return true;
 }
 
 bool HttpRpcRequest::SerializeAsJSON() {
@@ -98,7 +117,7 @@ bool HttpRpcRequest::SerializeAsJSON() {
 				callState_.GetRequest()->SerializeAsString(),
 				&jsonString,
 				jsonOptions);
-			if (!status.ok()) {
+			if (!status.ok() || jsonString == nullptr) {
 				UE_LOG(HttpRpcRequestLog,
 					Error,
 					TEXT("Failed to serialize to json (%s)"),
@@ -107,18 +126,18 @@ bool HttpRpcRequest::SerializeAsJSON() {
 				return false;
 			}
 		}
-		if (jsonString != nullptr) {
-			stringBuffer = FString(jsonString->c_str());
-			google::protobuf::util::windows::DeleteString(jsonString);
-		}
+		stringBuffer = FString(jsonString->c_str());
+		google::protobuf::util::windows::DeleteString(jsonString);
 	}
+
 	httpRequest_->SetContentAsString(stringBuffer);
+	httpRequest_->SetHeader("Content-Type", "application/json");
 	return true;
 }
 
 bool HttpRpcRequest::Execute() {
 	if (!httpRequest_->ProcessRequest()) {
-		UE_LOG(HttpRpcRequestLog, Error, TEXT("Login HTTP request failed"));
+		UE_LOG(HttpRpcRequestLog, Error, TEXT("ProcessRequest failed"));
 		callState_.GetController()->SetFailed("ProcessRequest failed");
 		return false;
 	}

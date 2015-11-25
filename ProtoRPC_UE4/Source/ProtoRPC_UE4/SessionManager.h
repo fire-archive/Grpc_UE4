@@ -10,10 +10,12 @@ namespace google {
 		class RpcController;
 	}
 }
-namespace example_proto {
-	class AuthService;
-	class AuthRequest;
-	class AuthResponse;
+namespace com {
+	namespace paddlecreekgames {
+		class AuthService;
+		class AuthRequest;
+		class AuthResponse;
+	}
 }
 
 enum class SessionState {
@@ -62,9 +64,9 @@ private:
 	// Underlying RPC controller to use. Pointer owned.
 	TScopedPointer<google::protobuf::RpcController> controller_;
 	// Underlying RPC service stub. Pointer owned.
-	TScopedPointer<example_proto::AuthService> authService_;
+	TScopedPointer<com::paddlecreekgames::AuthService> authService_;
 	// Protocol buffer used to contain the auth request. Pointer owned.
-	TScopedPointer<example_proto::AuthRequest> authRequest_;
+	TScopedPointer<com::paddlecreekgames::AuthRequest> authRequest_;
 	// Protocol buffer used to contain the auth response. Pointer owned.
-	TScopedPointer<example_proto::AuthResponse> authResponse_;
+	TScopedPointer<com::paddlecreekgames::AuthResponse> authResponse_;
 };

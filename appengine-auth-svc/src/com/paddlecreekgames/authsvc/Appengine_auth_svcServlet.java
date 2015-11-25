@@ -31,12 +31,33 @@ public class Appengine_auth_svcServlet extends HttpServlet {
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+		// TODO(san): Move all of this into a more generic re-usable class.
+
+		// Extract request ID and method names from the HTTP header.
+		int requestId = -1;
+		try {
+			requestId = req.getIntHeader("X-Request-ID");
+			if (requestId == -1) {
+				resp.sendError(500, "Bad request ID");
+				return;
+			}
+		} catch (Exception e) {
+			resp.sendError(500, "No request ID");
+			return;
+		}
+		String methodName = null;
+		try {
+			methodName = req.getHeader("X-Method");
+		} catch (Exception e) {
+			resp.sendError(500, "No method name");
+			return;
+		}
+
 		// TODO(san): Cache the service somewhere.
 		BlockingAuthServiceImpl svcImpl = new BlockingAuthServiceImpl();
 		BlockingService blockingSvc = ExampleService.AuthService.newReflectiveBlockingService(svcImpl);
 		
 		// Decode the method descriptor.
-		String methodName = "TODO";
 		MethodDescriptor method = blockingSvc.getDescriptorForType().findMethodByName(methodName);
 		if (method == null) {
 			resp.sendError(500, "Unknown method");
@@ -97,16 +118,23 @@ public class Appengine_auth_svcServlet extends HttpServlet {
 		
 		// Encode the response protobuf based on the request content-type.
 		resp.setContentType(req.getContentType());
+		resp.setIntHeader("X-Request-ID", requestId);
 		switch (req.getContentType().toLowerCase()) {
 		case "application/x-protobuf":
+			byte[] byteArray = responseProto.toByteArray();
+			char[] charArray = (new String(byteArray)).toCharArray();
+			resp.getWriter().write(charArray);
 			break;
 		case "application/x-protobuf-text":
+			resp.getWriter().write(responseProto.toString());
 			break;
 		case "application/json":
+			resp.getWriter().write(JsonFormat.printer().print(responseProto));
 			break;
 		default:
 			resp.sendError(500,  "Wat?");
 			return;
 		}
+		// Dishes are done man!
 	}
 }
