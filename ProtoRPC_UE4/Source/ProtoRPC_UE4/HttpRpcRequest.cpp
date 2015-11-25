@@ -27,10 +27,13 @@ using google::protobuf::util::Status;
 using google::protobuf::util::TypeResolver;
 
 static const char kTypeUrlPrefix[] = "type.googleapis.com";
-
 static std::string GetTypeUrl(const Descriptor* message) {
 	return std::string(kTypeUrlPrefix) + "/" + message->full_name();
 }
+
+const FString HttpRpcRequest::kContentTypeJson = "application/json";
+const FString HttpRpcRequest::kContentTypeBinary = "application/x-protobuf";
+const FString HttpRpcRequest::kContentTypeASCII = "application/x-protobuf-text";
 
 HttpRpcRequest::HttpRpcRequest(
 	HttpRpcRequestStrategy RequestStrategy, TypeResolver* ProtoTypeResolver, int64 RequestId, const FString& ServiceUri,
@@ -70,6 +73,7 @@ bool HttpRpcRequest::Init() {
 	if (!serializedOk) {
 		return false;
 	}
+
 	httpRequest_->OnProcessRequestComplete().BindRaw(this, &HttpRpcRequest::onHttpRequestCompleted);
 	return true;
 }
@@ -83,8 +87,9 @@ bool HttpRpcRequest::SerializeAsProtoASCII() {
 		return false;
 	}
 	httpRequest_->SetContentAsString(FString(textString->c_str()));
+	UE_LOG(HttpRpcRequestLog, Display, TEXT("ascii_serialized: %s"), *FString(textString->c_str()));
 	google::protobuf::util::windows::DeleteString(textString);
-	httpRequest_->SetHeader("Content-Type", "application/x-protobuf-text");
+	httpRequest_->SetHeader("Content-Type", kContentTypeASCII);
 	return true;
 }
 
@@ -99,7 +104,7 @@ bool HttpRpcRequest::SerializeAsProtoBinary() {
 	httpRequest_->SetContentAsString(FString(binaryString->c_str()));
 	google::protobuf::util::windows::DeleteString(binaryString);
 
-	httpRequest_->SetHeader("Content-Type", "application/x-protobuf");
+	httpRequest_->SetHeader("Content-Type", kContentTypeBinary);
 	return true;
 }
 
@@ -131,7 +136,7 @@ bool HttpRpcRequest::SerializeAsJSON() {
 	}
 
 	httpRequest_->SetContentAsString(stringBuffer);
-	httpRequest_->SetHeader("Content-Type", "application/json");
+	httpRequest_->SetHeader("Content-Type", kContentTypeJson);
 	return true;
 }
 
@@ -150,13 +155,26 @@ void HttpRpcRequest::onHttpRequestCompleted(FHttpRequestPtr request, FHttpRespon
 
 	}
 	else {
-		switch (response->GetResponseCode()) {
-		case 200:
-			break;
-		default:
-			UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP response code %d (%s)"), response->GetResponseCode(),
-				   *response->GetContentAsString());
-			break;
+		const int responseCode = response->GetResponseCode();
+		if (responseCode == 200) {
+			// "application/x-protobuf-text; charset=ISO-8859-1"
+			const FString contentType = response->GetContentType();
+			if (contentType.StartsWith(kContentTypeJson)) {
+
+			}
+			else if (contentType.StartsWith(kContentTypeASCII)) {
+				UE_LOG(HttpRpcRequestLog, Display, TEXT("resp: %s"), *response->GetContentAsString());
+			}
+			else if (contentType.StartsWith(kContentTypeBinary)) {
+
+			}
+			else {
+				UE_LOG(HttpRpcRequestLog, Error, TEXT("Invalid content type '%s'"), *contentType);
+			}
+		}
+		else {
+			UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP response code %d (%s)"), responseCode,
+				*response->GetContentAsString());
 		}
 	}
 

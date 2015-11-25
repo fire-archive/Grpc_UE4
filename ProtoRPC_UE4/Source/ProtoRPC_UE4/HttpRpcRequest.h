@@ -39,6 +39,10 @@ public:
 	bool Execute();
 
 private:
+	static const FString kContentTypeJson;
+	static const FString kContentTypeBinary;
+	static const FString kContentTypeASCII;
+
 	bool SerializeAsJSON();
 	bool SerializeAsProtoASCII();
 	bool SerializeAsProtoBinary();
