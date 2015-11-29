@@ -23,7 +23,8 @@ public class ProtoRPC_UE4 : ModuleRules
 		//			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
 		//		}
 		// }
-        LoadThirdParty(Target);
+
+        	// LoadThirdParty(Target);
 	}
 
     private bool LoadThirdParty(TargetInfo Target) {
