@@ -33,7 +33,7 @@ static std::string GetTypeUrl(const Descriptor* message) {
 HttpRpcChannel::HttpRpcChannel(const FString& ServiceUri)
     : serviceUri_(ServiceUri),
 	  nextRequestId_(0),
-	  typeResolver_(NewTypeResolverForDescriptorPool(kTypeUrlPrefix, DescriptorPool::generated_pool())) {
+	  typeResolver_(NewTypeResolverForDescriptorPool(kTypeUrlPrefix, DescriptorPool::generated_pool())){
 }
 
 HttpRpcChannel::~HttpRpcChannel() {}
@@ -42,10 +42,6 @@ void HttpRpcChannel::CallMethod(const MethodDescriptor* method, RpcController* c
 	int64 requestId = FPlatformAtomics::InterlockedIncrement(&nextRequestId_);
 	HttpRpcRequest* newRequest = new HttpRpcRequest(
 		HttpRpcRequestStrategy::HRRS_PROTOASCII, typeResolver_, requestId, serviceUri_, method, controller, request, response, done);
-	{
-		FScopeLock mutexLock(&outstandingRequestsLock_);
-		outstandingRequests_.Add(requestId, newRequest);
-	}
 	if (!newRequest->Init() || !newRequest->Execute()) {
 		UE_LOG(HttpRpcChannelLog, Error, TEXT("Failed to init/execute the request on the client side"));
 		delete newRequest;
@@ -53,4 +49,5 @@ void HttpRpcChannel::CallMethod(const MethodDescriptor* method, RpcController* c
 		return;
 	}
 }
+
 

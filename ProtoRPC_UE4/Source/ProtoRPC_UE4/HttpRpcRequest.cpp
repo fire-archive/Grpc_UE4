@@ -87,7 +87,7 @@ bool HttpRpcRequest::SerializeAsProtoASCII() {
 		return false;
 	}
 	httpRequest_->SetContentAsString(FString(textString->c_str()));
-	UE_LOG(HttpRpcRequestLog, Display, TEXT("ascii_serialized: %s"), *FString(textString->c_str()));
+	//UE_LOG(HttpRpcRequestLog, Display, TEXT("ascii_serialized: %s"), *FString(textString->c_str()));
 	google::protobuf::util::windows::DeleteString(textString);
 	httpRequest_->SetHeader("Content-Type", kContentTypeASCII);
 	return true;
@@ -150,33 +150,79 @@ bool HttpRpcRequest::Execute() {
 }
 
 void HttpRpcRequest::onHttpRequestCompleted(FHttpRequestPtr request, FHttpResponsePtr response, bool bWasSuccessful) {
-	int64 requestId = -1;
 	if (!bWasSuccessful) {
-
-	}
-	else {
+		UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP request failed"));
+		callState_.GetController()->SetFailed("HTTP request failed");
+	} else {
 		const int responseCode = response->GetResponseCode();
-		if (responseCode == 200) {
-			// "application/x-protobuf-text; charset=ISO-8859-1"
-			const FString contentType = response->GetContentType();
-			if (contentType.StartsWith(kContentTypeJson)) {
-
+		if (responseCode != 200) {
+			if ((responseCode >= 300) && (responseCode < 400)) {
+				// TODO(san): Handle redirects.
+				callState_.GetController()->SetFailed("Unsupported redirect");
+			} else {
+				UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP response code %d (%s)"), response->GetResponseCode(), *response->GetContentAsString());
+				callState_.GetController()->SetFailed("Bad HTTP response code");
 			}
-			else if (contentType.StartsWith(kContentTypeASCII)) {
-				UE_LOG(HttpRpcRequestLog, Display, TEXT("resp: %s"), *response->GetContentAsString());
+		} else {
+			// Successful HTTP response.
+			int requestId = ParseRequestIdFromResponse(response);
+			if (requestId == -1) {
+				UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP response missing request id"));
+				callState_.GetController()->SetFailed("Response missing request id");
+				// TODO(san): Think about whether we should be strict about this given we have the request handy.
+			} else if (requestId != FCString::Atoi(*request->GetHeader("X-Request-ID"))) {
+				// If this happens legitimately then we are most likely inheriting a 'threading issue' from the
+				// HTTP module - in which case we'll probably need to track outstanding requests ourselves.
+				UE_LOG(HttpRpcRequestLog, Error, TEXT("Mismatched Request/Response!"));
+				callState_.GetController()->SetFailed("Mismatched Request/Response ID");
+			} else {
+				// Request ID is valid. Extract the protobuf from the HTTP content buffer.
+				// N.B: The returned protobuffer is allocated from the libproto.dll heap so it
+				// must be freed via the same dll.
+				Message* responseProto = ParseMessageFromResponse(response);
+				if (responseProto != nullptr) {
+					callState_.GetResponse()->MergeFrom(*responseProto);
+					google::protobuf::util::windows::DeleteMessage(responseProto);
+				} else {
+					UE_LOG(HttpRpcRequestLog, Warning, TEXT("Failed to parse response protobuf"));
+					callState_.GetController()->SetFailed("Failed to parse response protobuf");
+				}
 			}
-			else if (contentType.StartsWith(kContentTypeBinary)) {
-
-			}
-			else {
-				UE_LOG(HttpRpcRequestLog, Error, TEXT("Invalid content type '%s'"), *contentType);
-			}
-		}
-		else {
-			UE_LOG(HttpRpcRequestLog, Error, TEXT("HTTP response code %d (%s)"), responseCode,
-				*response->GetContentAsString());
 		}
 	}
 
-	// TODO(san): Notify our channel.
+	Closure* cachedClosure = callState_.GetDone();
+	delete this;
+	cachedClosure->Run();
+}
+
+int HttpRpcRequest::ParseRequestIdFromResponse(FHttpResponsePtr response) {
+	FString requestIdString = response->GetHeader("X-Request-ID");
+	if (requestIdString == "") {
+		return -1;
+	}
+	return FCString::Atoi(*requestIdString);
+}
+
+Message* HttpRpcRequest::ParseMessageFromResponse(FHttpResponsePtr response) {
+	const FString contentType = response->GetContentType();
+	Message* responseProto = nullptr;
+
+	if (contentType.StartsWith(kContentTypeJson)) {
+
+	} else if (contentType.StartsWith(kContentTypeASCII)) {
+		std::string textInput;
+		if (!google::protobuf::util::windows::ParseFromTextString(
+			callState_.GetResponse()->GetDescriptor(), TCHAR_TO_UTF8(*response->GetContentAsString()),
+			&responseProto)) {
+			UE_LOG(HttpRpcRequestLog, Error, TEXT("ASCII response parse failed"));
+			return nullptr;
+		}
+	} else if (contentType.StartsWith(kContentTypeBinary)) {
+
+	} else {
+		UE_LOG(HttpRpcRequestLog, Error, TEXT("Invalid content type '%s'"), *contentType);
+		return nullptr;
+	}
+	return responseProto;
 }

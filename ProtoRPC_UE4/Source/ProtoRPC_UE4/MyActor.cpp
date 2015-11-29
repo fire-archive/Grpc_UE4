@@ -20,6 +20,12 @@ void AMyActor::Tick( float DeltaTime ) {
 }
 
 void AMyActor::AuthenticationComplete() {
+	if (sessionManager_.GetSessionState() == SessionState::SS_Authenticated) {
+
+	}
+	else {
+
+	}
 
 }
 

@@ -34,8 +34,5 @@ private:
 	FString serviceUri_;
 	// Next available request ID.
 	int64 nextRequestId_;
-	// Map of outstanding requests.
-	TMap<int64, HttpRpcRequest*> outstandingRequests_;
-	FCriticalSection outstandingRequestsLock_;
 	TScopedPointer<google::protobuf::util::TypeResolver> typeResolver_;
 };

@@ -47,6 +47,9 @@ private:
 	bool SerializeAsProtoASCII();
 	bool SerializeAsProtoBinary();
 
+	int ParseRequestIdFromResponse(FHttpResponsePtr response);
+	google::protobuf::Message* ParseMessageFromResponse(FHttpResponsePtr response);
+
 	// Delegate called by UE4's HTTP module when a request completes.
 	void onHttpRequestCompleted(FHttpRequestPtr request, FHttpResponsePtr response, bool bWasSuccessful);
 
