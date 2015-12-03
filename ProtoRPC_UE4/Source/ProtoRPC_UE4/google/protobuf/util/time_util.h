@@ -35,7 +35,9 @@
 #include <ostream>
 #include <string>
 #ifdef _MSC_VER
+#include "AllowWindowsPlatformTypes.h"
 #include <winsock2.h>
+#include "HideWindowsPlatformTypes.h"
 #else
 #include <sys/time.h>
 #endif
