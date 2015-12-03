@@ -46,6 +46,10 @@
 #include <google/protobuf/util/type_resolver.h>
 #include <google/protobuf/stubs/bytestream.h>
 
+#pragma warning(push)
+#pragma warning(disable:4510)  //  C4510 - 'type' : default constructor could not be generated
+#pragma warning(disable:4610)  //  C4610 - 'type' : can never be instantiated - user defined constructor required
+
 namespace google {
 namespace protobuf {
 namespace io {
@@ -469,4 +473,5 @@ class LIBPROTOBUF_EXPORT ProtoStreamObjectWriter : public StructuredObjectWriter
 }  // namespace protobuf
 
 }  // namespace google
+#pragma warning(pop)
 #endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_PROTOSTREAM_OBJECTWRITER_H__

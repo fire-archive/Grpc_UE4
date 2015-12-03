@@ -41,6 +41,9 @@
 #include <google/protobuf/stubs/map_util.h>
 #include <google/protobuf/stubs/mathlimits.h>
 
+#pragma warning(push)
+#pragma warning(disable:4018)  //  C4018 - 'expression' : signed/unsigned mismatch
+
 namespace google {
 namespace protobuf {
 namespace util {
@@ -328,3 +331,5 @@ bool SafeStrToFloat(StringPiece str, float *value) {
 }  // namespace util
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

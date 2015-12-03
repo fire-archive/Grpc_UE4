@@ -35,6 +35,9 @@
 #include <google/protobuf/util/internal/constants.h>
 #include <google/protobuf/stubs/map_util.h>
 
+#pragma warning(push)
+#pragma warning(disable:4800)  //  C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
+
 namespace google {
 namespace protobuf {
 namespace util {
@@ -533,3 +536,5 @@ void DefaultValueObjectWriter::RenderDataPiece(StringPiece name,
 }  // namespace util
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

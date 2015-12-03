@@ -33,6 +33,9 @@
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/status_macros.h>
 
+#pragma warning(push)
+#pragma warning(disable: 4018)  //  C4018 - 'expression' : signed/unsigned mismatch
+
 namespace google {
 namespace protobuf {
 namespace util {
@@ -223,3 +226,5 @@ util::Status DecodeCompactFieldMaskPaths(StringPiece paths,
 }  // namespace util
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)
