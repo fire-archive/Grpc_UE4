@@ -3,10 +3,10 @@
 
 #include "HttpRpcRequest.h"
 #include <google/protobuf/descriptor.h>
-#include <google/protobuf//message.h>
+#include <google/protobuf/message.h>
+#include <google/protobuf/text_format.h>
 #include <google/protobuf/util/json_util.h>
 #include <google/protobuf/util/type_resolver_util.h>
-#include <google/protobuf/util/windows_util.h>
 
 DEFINE_LOG_CATEGORY_STATIC(HttpRpcRequestLog, Log, All);
 #define LOCTEXT_NAMESPACE "HttpRpcRequest"
@@ -78,31 +78,21 @@ bool HttpRpcRequest::Init() {
 }
 
 bool HttpRpcRequest::SerializeAsProtoASCII() {
-	std::string* textString = nullptr;
-	google::protobuf::util::windows::SerializeToTextString(*callState_.GetRequest(), &textString);
-	if (textString == nullptr) {
+	std::string textString;
+	if (!google::protobuf::TextFormat::PrintToString(*callState_.GetRequest(), &textString)) {
 		UE_LOG(HttpRpcRequestLog, Error, TEXT("Failed to serialize to text"));
 		callState_.GetController()->SetFailed("Text serialization failed");
 		return false;
 	}
-	httpRequest_->SetContentAsString(FString(textString->c_str()));
+	httpRequest_->SetContentAsString(FString(textString.c_str()));
 	//UE_LOG(HttpRpcRequestLog, Display, TEXT("ascii_serialized: %s"), *FString(textString->c_str()));
-	google::protobuf::util::windows::DeleteString(textString);
 	httpRequest_->SetHeader("Content-Type", kContentTypeASCII);
 	return true;
 }
 
 bool HttpRpcRequest::SerializeAsProtoBinary() {
-	std::string* binaryString = nullptr;
-	google::protobuf::util::windows::SerializeToBinaryString(*callState_.GetRequest(), &binaryString);
-	if (binaryString == nullptr) {
-		UE_LOG(HttpRpcRequestLog, Error, TEXT("Failed to serialize to binary"));
-		callState_.GetController()->SetFailed("Binary serialization failed");
-		return false;
-	}
-	httpRequest_->SetContentAsString(FString(binaryString->c_str()));
-	google::protobuf::util::windows::DeleteString(binaryString);
-
+	std::string binaryString = callState_.GetRequest()->SerializeAsString();
+	httpRequest_->SetContentAsString(FString(binaryString.c_str()));
 	httpRequest_->SetHeader("Content-Type", kContentTypeBinary);
 	return true;
 }
@@ -110,18 +100,18 @@ bool HttpRpcRequest::SerializeAsProtoBinary() {
 bool HttpRpcRequest::SerializeAsJSON() {
 	FString stringBuffer;
 	{
-		std::string* jsonString = nullptr;
+		std::string jsonString;
 		{
 			JsonOptions jsonOptions;
 			jsonOptions.always_print_primitive_fields = true;
 			jsonOptions.add_whitespace = true;
-			Status status = google::protobuf::util::windows::SerializeToJsonString(
+			Status status = google::protobuf::util::BinaryToJsonString(
 				typeResolver_,
 				GetTypeUrl(callState_.GetRequest()->GetDescriptor()),
 				callState_.GetRequest()->SerializeAsString(),
 				&jsonString,
 				jsonOptions);
-			if (!status.ok() || jsonString == nullptr) {
+			if (!status.ok()) {
 				UE_LOG(HttpRpcRequestLog,
 					Error,
 					TEXT("Failed to serialize to json (%s)"),
@@ -130,8 +120,7 @@ bool HttpRpcRequest::SerializeAsJSON() {
 				return false;
 			}
 		}
-		stringBuffer = FString(jsonString->c_str());
-		google::protobuf::util::windows::DeleteString(jsonString);
+		stringBuffer = FString(jsonString.c_str());
 	}
 
 	httpRequest_->SetContentAsString(stringBuffer);
@@ -176,13 +165,7 @@ void HttpRpcRequest::onHttpRequestCompleted(FHttpRequestPtr request, FHttpRespon
 				callState_.GetController()->SetFailed("Mismatched Request/Response ID");
 			} else {
 				// Request ID is valid. Extract the protobuf from the HTTP content buffer.
-				// N.B: The returned protobuffer is allocated from the libproto.dll heap so it
-				// must be freed via the same dll.
-				Message* responseProto = ParseMessageFromResponse(response);
-				if (responseProto != nullptr) {
-					callState_.GetResponse()->MergeFrom(*responseProto);
-					google::protobuf::util::windows::DeleteMessage(responseProto);
-				} else {
+				if (!ParseMessageFromResponse(response)) {
 					UE_LOG(HttpRpcRequestLog, Warning, TEXT("Failed to parse response protobuf"));
 					callState_.GetController()->SetFailed("Failed to parse response protobuf");
 				}
@@ -203,25 +186,21 @@ int HttpRpcRequest::ParseRequestIdFromResponse(FHttpResponsePtr response) {
 	return FCString::Atoi(*requestIdString);
 }
 
-Message* HttpRpcRequest::ParseMessageFromResponse(FHttpResponsePtr response) {
+bool HttpRpcRequest::ParseMessageFromResponse(FHttpResponsePtr response) {
 	const FString contentType = response->GetContentType();
-	Message* responseProto = nullptr;
 
 	if (contentType.StartsWith(kContentTypeJson)) {
 
 	} else if (contentType.StartsWith(kContentTypeASCII)) {
-		std::string textInput;
-		if (!google::protobuf::util::windows::ParseFromTextString(
-			callState_.GetResponse()->GetDescriptor(), TCHAR_TO_UTF8(*response->GetContentAsString()),
-			&responseProto)) {
+		if (!google::protobuf::TextFormat::ParseFromString(TCHAR_TO_UTF8(*response->GetContentAsString()), callState_.GetResponse())) {
 			UE_LOG(HttpRpcRequestLog, Error, TEXT("ASCII response parse failed"));
-			return nullptr;
+			return false;
 		}
+		return true;
 	} else if (contentType.StartsWith(kContentTypeBinary)) {
 
 	} else {
 		UE_LOG(HttpRpcRequestLog, Error, TEXT("Invalid content type '%s'"), *contentType);
-		return nullptr;
 	}
-	return responseProto;
+	return false;
 }
