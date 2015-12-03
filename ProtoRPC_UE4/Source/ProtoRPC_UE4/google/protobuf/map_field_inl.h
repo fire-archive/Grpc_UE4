@@ -40,6 +40,9 @@
 #include <google/protobuf/map_field.h>
 #include <google/protobuf/map_type_handler.h>
 
+#pragma warning(push)
+#pragma warning(disable:4800)  //  C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
+
 namespace google {
 namespace protobuf {
 namespace internal {
@@ -479,4 +482,5 @@ MapField<Key, T, kKeyFieldType, kValueFieldType,
 }  // namespace protobuf
 
 }  // namespace google
+#pragma warning(pop)
 #endif  // GOOGLE_PROTOBUF_MAP_FIELD_INL_H__

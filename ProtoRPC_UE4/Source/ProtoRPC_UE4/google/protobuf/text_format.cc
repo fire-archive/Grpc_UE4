@@ -58,6 +58,9 @@
 #include <google/protobuf/stubs/map_util.h>
 #include <google/protobuf/stubs/stl_util.h>
 
+#pragma warning(push)
+#pragma warning(disable:4800)  //  C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
+
 namespace google {
 namespace protobuf {
 
@@ -1956,3 +1959,5 @@ void TextFormat::Printer::PrintUnknownFields(
 
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

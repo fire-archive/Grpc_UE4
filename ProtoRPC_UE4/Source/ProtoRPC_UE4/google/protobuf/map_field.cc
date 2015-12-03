@@ -30,12 +30,28 @@
 
 #include <google/protobuf/map_field.h>
 #include <google/protobuf/map_field_inl.h>
+#include <google/protobuf/message.h>
 
 #include <vector>
+
+#pragma warning(push)
+#pragma warning(disable:4800)  //  C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
 
 namespace google {
 namespace protobuf {
 namespace internal {
+#if defined(_MSC_VER)
+	// Voodoo required to make template specialization work in VS
+	extern template Message* GenericTypeHandler<Message>::NewFromPrototype(const Message* prototype, google::protobuf::Arena* arena);
+	template<>
+	google::protobuf::Arena* GenericTypeHandler<Message>::GetArena(Message* value) {
+		return value->GetArena();
+	}
+	template<>
+	void* GenericTypeHandler<Message>::GetMaybeArenaPointer(Message* value) {
+		return value->GetMaybeArenaPointer();
+	}
+#endif  // _MSC_VER
 
 ProtobufOnceType map_entry_default_instances_once_;
 Mutex* map_entry_default_instances_mutex_;
@@ -464,3 +480,5 @@ int DynamicMapField::SpaceUsedExcludingSelfNoLock() const {
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

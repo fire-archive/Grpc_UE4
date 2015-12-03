@@ -48,9 +48,26 @@
 
 #define GOOGLE_PROTOBUF_HAS_ONEOF
 
+#pragma warning(push)
+#pragma warning(disable:4800)  // C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
+#pragma warning(disable:4065)  // C4065: switch statement contains 'default' but no 'case' labels
+
 namespace google {
 namespace protobuf {
 namespace internal {
+
+#if defined(_MSC_VER)
+	// Voodoo required to make template specialization work in VS
+	extern template Message* GenericTypeHandler<Message>::NewFromPrototype(const Message* prototype, google::protobuf::Arena* arena);
+	template<>
+	google::protobuf::Arena* GenericTypeHandler<Message>::GetArena(Message* value) {
+		return value->GetArena();
+	}
+	template<>
+	void* GenericTypeHandler<Message>::GetMaybeArenaPointer(Message* value) {
+		return value->GetMaybeArenaPointer();
+	}
+#endif  // _MSC_VER
 
 namespace {
 bool IsMapFieldInApi(const FieldDescriptor* field) {
@@ -2284,3 +2301,5 @@ GeneratedMessageReflection::NewGeneratedMessageReflection(
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

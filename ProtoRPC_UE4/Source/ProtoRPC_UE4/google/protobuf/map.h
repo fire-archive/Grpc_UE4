@@ -42,6 +42,10 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/descriptor.h>
 
+#pragma warning(push)
+#pragma warning(disable:4800)  // C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
+#pragma warning(disable:4715)  // C4715 - 'blah' : not all control paths return a value
+
 namespace google {
 namespace protobuf {
 
@@ -879,4 +883,5 @@ struct hash<google::protobuf::MapKey> {
 };
 GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_END
 
+#pragma warning(pop)
 #endif  // GOOGLE_PROTOBUF_MAP_H__
