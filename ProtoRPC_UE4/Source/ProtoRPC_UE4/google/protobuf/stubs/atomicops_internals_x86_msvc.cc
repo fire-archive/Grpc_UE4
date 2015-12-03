@@ -46,7 +46,7 @@ namespace internal {
 
 inline void MemoryBarrier() {
   // We use MemoryBarrier from WinNT.h
-  ::MemoryBarrier();
+	MemoryBarrier();
 }
 
 Atomic32 NoBarrier_CompareAndSwap(volatile Atomic32* ptr,

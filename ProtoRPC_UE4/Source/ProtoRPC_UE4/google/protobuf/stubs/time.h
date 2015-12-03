@@ -54,7 +54,7 @@ bool LIBPROTOBUF_EXPORT SecondsToDateTime(int64 seconds, DateTime* time);
 // Returns false if the DateTime is not valid or is not in the valid range.
 bool LIBPROTOBUF_EXPORT DateTimeToSeconds(const DateTime& time, int64* seconds);
 
-void LIBPROTOBUF_EXPORT GetCurrentTime(int64* seconds, int32* nanos);
+// void LIBPROTOBUF_EXPORT GetCurrentTime(int64* seconds, int32* nanos);
 
 // Formats a time string in RFC3339 fromat.
 //

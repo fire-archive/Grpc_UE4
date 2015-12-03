@@ -55,6 +55,9 @@
 
 #include <google/protobuf/stubs/common.h>
 
+#pragma warning(push)
+#pragma warning(disable:4800)  // C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
+
 // ========================================================================= //
 
 // Useful integer and floating point limits and type traits.
@@ -276,4 +279,5 @@ DECL_FP_LIMITS(long double, LDBL)
 }  // namespace protobuf
 }  // namespace google
 
+#pragma warning(pop)
 #endif  // UTIL_MATH_MATHLIMITS_H__

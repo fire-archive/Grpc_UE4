@@ -33,6 +33,9 @@
 #include <string.h>
 #include <algorithm>
 
+#pragma warning(push)
+#pragma warning(disable:4018)  //  C4018 - 'expression' : signed/unsigned mismatch
+
 namespace google {
 namespace protobuf {
 namespace strings {
@@ -194,3 +197,5 @@ void LimitByteSource::CopyTo(ByteSink *sink, size_t n) {
 }  // namespace strings
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

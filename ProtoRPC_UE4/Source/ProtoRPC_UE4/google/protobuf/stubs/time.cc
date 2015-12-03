@@ -262,12 +262,12 @@ bool DateTimeToSeconds(const DateTime& time, int64* seconds) {
   return true;
 }
 
-void GetCurrentTime(int64* seconds, int32* nanos) {
+//void GetCurrentTime(int64* seconds, int32* nanos) {
   // TODO(xiaofeng): Improve the accuracy of this implementation (or just
   // remove this method from protobuf).
-  *seconds = time(NULL);
-  *nanos = 0;
-}
+//  *seconds = time(NULL);
+//  *nanos = 0;
+//}
 
 string FormatTime(int64 seconds, int32 nanos) {
   DateTime time;

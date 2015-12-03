@@ -42,6 +42,9 @@
 
 #include <google/protobuf/stubs/stl_util.h>
 
+#pragma warning(push)
+#pragma warning(disable:4996)  // C4996 - 'function': was declared deprecated
+
 #ifdef _WIN32
 // MSVC has only _snprintf, not snprintf.
 //
@@ -333,7 +336,7 @@ int UnescapeCEscapeSequences(const char* source, char* dest,
     } else {
       switch ( *++p ) {                    // skip past the '\\'
         case '\0':
-          LOG_STRING(ERROR, errors) << "String cannot end with \\";
+          // LOG_STRING(ERROR, errors) << "String cannot end with \\";
           *d = '\0';
           return d - dest;   // we're done with p
         case 'a':  *d++ = '\a';  break;
@@ -360,10 +363,10 @@ int UnescapeCEscapeSequences(const char* source, char* dest,
         case 'x': case 'X': {
           if (!isxdigit(p[1])) {
             if (p[1] == '\0') {
-              LOG_STRING(ERROR, errors) << "String cannot end with \\x";
+              // LOG_STRING(ERROR, errors) << "String cannot end with \\x";
             } else {
-              LOG_STRING(ERROR, errors) <<
-                "\\x cannot be followed by non-hex digit: \\" << *p << p[1];
+              // LOG_STRING(ERROR, errors) <<
+              //  "\\x cannot be followed by non-hex digit: \\" << *p << p[1];
             }
             break;
           }
@@ -372,8 +375,8 @@ int UnescapeCEscapeSequences(const char* source, char* dest,
           while (isxdigit(p[1]))  // arbitrarily many hex digits
             ch = (ch << 4) + hex_digit_to_int(*++p);
           if (ch > 0xFF)
-            LOG_STRING(ERROR, errors) << "Value of " <<
-              "\\" << string(hex_start, p+1-hex_start) << " exceeds 8 bits";
+            //LOG_STRING(ERROR, errors) << "Value of " <<
+            //  "\\" << string(hex_start, p+1-hex_start) << " exceeds 8 bits";
           *d++ = ch;
           break;
         }
@@ -424,8 +427,9 @@ int UnescapeCEscapeSequences(const char* source, char* dest,
           break;
         }
 #endif
-        default:
-          LOG_STRING(ERROR, errors) << "Unknown escape sequence: \\" << *p;
+		default:
+			break;
+         // LOG_STRING(ERROR, errors) << "Unknown escape sequence: \\" << *p;
       }
       p++;                                 // read past letter we escaped
     }
@@ -2233,3 +2237,5 @@ int UTF8FirstLetterNumBytes(const char* src, int len) {
 
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

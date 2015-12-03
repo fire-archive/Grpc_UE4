@@ -34,6 +34,9 @@
 #include <iostream>  // NOLINT(readability/streams)
 #include <sstream>
 
+#pragma warning(push)
+#pragma warning(disable:4018)  //  C4018 - 'expression' : signed/unsigned mismatch
+
 namespace google {
 namespace protobuf {
 
@@ -198,3 +201,5 @@ std::ostream& operator<<(std::ostream& o, const uint128& b) {
 
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

@@ -35,6 +35,9 @@
 #include <string>
 #include <ostream>
 
+#pragma warning(push)
+#pragma warning(disable:4018)  //  C4018 - 'expression' : signed/unsigned mismatch
+
 namespace google {
 namespace protobuf {
 std::ostream& operator<<(std::ostream& o, StringPiece piece) {
@@ -266,3 +269,5 @@ const StringPiece::size_type StringPiece::npos = size_type(-1);
 
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)

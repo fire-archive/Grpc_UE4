@@ -161,7 +161,7 @@ static const uint64 kuint64max = GOOGLE_ULONGLONG(0xFFFFFFFFFFFFFFFF);
 #define GOOGLE_ATTRIBUTE_NOINLINE __declspec(noinline)
 #else
 // Other compilers will have to figure it out for themselves.
-#define GOOGLE_ATTRIBUTE_NOINLINE
+#define GOOGLE_ATTRIBUTE_NOINLINE __declspec(noinline)
 #endif
 #endif
 
