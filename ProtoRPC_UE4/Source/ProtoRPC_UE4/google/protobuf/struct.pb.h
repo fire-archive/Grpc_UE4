@@ -36,7 +36,7 @@ namespace google {
 namespace protobuf {
 
 // Internal implementation detail -- do not call these.
-void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+void protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
 void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
 void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 
@@ -49,12 +49,12 @@ enum NullValue {
   NullValue_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   NullValue_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-LIBPROTOBUF_EXPORT bool NullValue_IsValid(int value);
+bool NullValue_IsValid(int value);
 const NullValue NullValue_MIN = NULL_VALUE;
 const NullValue NullValue_MAX = NULL_VALUE;
 const int NullValue_ARRAYSIZE = NullValue_MAX + 1;
 
-LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* NullValue_descriptor();
+const ::google::protobuf::EnumDescriptor* NullValue_descriptor();
 inline const ::std::string& NullValue_Name(NullValue value) {
   return ::google::protobuf::internal::NameOfEnum(
     NullValue_descriptor(), value);
@@ -66,7 +66,7 @@ inline bool NullValue_Parse(
 }
 // ===================================================================
 
-class LIBPROTOBUF_EXPORT Struct : public ::google::protobuf::Message {
+class Struct : public ::google::protobuf::Message {
  public:
   Struct();
   virtual ~Struct();
@@ -149,7 +149,7 @@ class LIBPROTOBUF_EXPORT Struct : public ::google::protobuf::Message {
       ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
       0 > fields_;
   mutable int _cached_size_;
-  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+  friend void  protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 
@@ -158,7 +158,7 @@ class LIBPROTOBUF_EXPORT Struct : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT Value : public ::google::protobuf::Message {
+class Value : public ::google::protobuf::Message {
  public:
   Value();
   virtual ~Value();
@@ -311,7 +311,7 @@ class LIBPROTOBUF_EXPORT Value : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _oneof_case_[1];
 
-  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+  friend void  protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 
@@ -320,7 +320,7 @@ class LIBPROTOBUF_EXPORT Value : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT ListValue : public ::google::protobuf::Message {
+class ListValue : public ::google::protobuf::Message {
  public:
   ListValue();
   virtual ~ListValue();
@@ -395,7 +395,7 @@ class LIBPROTOBUF_EXPORT ListValue : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::google::protobuf::Value > values_;
   mutable int _cached_size_;
-  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+  friend void  protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 

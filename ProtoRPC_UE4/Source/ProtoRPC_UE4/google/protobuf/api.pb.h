@@ -35,7 +35,7 @@ namespace google {
 namespace protobuf {
 
 // Internal implementation detail -- do not call these.
-void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+void protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
 void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
 void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
@@ -45,7 +45,7 @@ class Mixin;
 
 // ===================================================================
 
-class LIBPROTOBUF_EXPORT Api : public ::google::protobuf::Message {
+class Api : public ::google::protobuf::Message {
  public:
   Api();
   virtual ~Api();
@@ -187,7 +187,7 @@ class LIBPROTOBUF_EXPORT Api : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::google::protobuf::Mixin > mixins_;
   int syntax_;
   mutable int _cached_size_;
-  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+  friend void  protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
@@ -196,7 +196,7 @@ class LIBPROTOBUF_EXPORT Api : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT Method : public ::google::protobuf::Message {
+class Method : public ::google::protobuf::Message {
  public:
   Method();
   virtual ~Method();
@@ -328,7 +328,7 @@ class LIBPROTOBUF_EXPORT Method : public ::google::protobuf::Message {
   int syntax_;
   ::google::protobuf::RepeatedPtrField< ::google::protobuf::Option > options_;
   mutable int _cached_size_;
-  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+  friend void  protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
@@ -337,7 +337,7 @@ class LIBPROTOBUF_EXPORT Method : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOBUF_EXPORT Mixin : public ::google::protobuf::Message {
+class Mixin : public ::google::protobuf::Message {
  public:
   Mixin();
   virtual ~Mixin();
@@ -423,7 +423,7 @@ class LIBPROTOBUF_EXPORT Mixin : public ::google::protobuf::Message {
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr root_;
   mutable int _cached_size_;
-  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+  friend void  protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
