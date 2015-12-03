@@ -254,9 +254,13 @@ enum Cardinality {
 
 }  // namespace
 
+#if defined(_MSC_VER)
+#define GOOGLE_DCHECK_TYPE(EXTENSION, LABEL, CPPTYPE) {}
+#else
 #define GOOGLE_DCHECK_TYPE(EXTENSION, LABEL, CPPTYPE)                             \
   GOOGLE_DCHECK_EQ((EXTENSION).is_repeated ? REPEATED : OPTIONAL, LABEL);         \
   GOOGLE_DCHECK_EQ(cpp_type((EXTENSION).type), WireFormatLite::CPPTYPE_##CPPTYPE)
+#endif  // (_MSC_VER)
 
 // -------------------------------------------------------------------
 // Primitives
