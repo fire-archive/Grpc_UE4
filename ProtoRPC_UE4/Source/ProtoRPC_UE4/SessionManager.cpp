@@ -4,8 +4,8 @@
 #include "SessionManager.h"
 
 #include "GeneratedProtoStubs/ExampleService.pb.h"
-#include "HttpRpcChannel.h"
-#include "HttpRpcController.h"
+#include "FHttpModuleRpc/HttpRpcChannel.h"
+#include "FHttpModuleRpc/HttpRpcController.h"
 
 SessionManager::SessionManager()
     : sessionState_(SessionState::SS_NotAuthenticated),
