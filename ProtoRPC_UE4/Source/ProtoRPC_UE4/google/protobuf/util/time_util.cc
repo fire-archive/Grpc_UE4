@@ -122,7 +122,10 @@ bool ParseTime(const string& value, int64* seconds, int32* nanos) {
 }
 
 void CurrentTime(int64* seconds, int32* nanos) {
-  return ::google::protobuf::internal::GetCurrentTime(seconds, nanos);
+	time_t now = time(nullptr);
+
+	*seconds = (int64) now;
+	*nanos = (int32) 0;
 }
 
 // Truncates the remainder part after division.
