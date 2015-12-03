@@ -3,8 +3,6 @@
 
 #include "SessionManager.h"
 
-
-#include "AllowWindowsPlatformTypes.h"
 #include "GeneratedProtoStubs/ExampleService.pb.h"
 #include "HttpRpcChannel.h"
 #include "HttpRpcController.h"

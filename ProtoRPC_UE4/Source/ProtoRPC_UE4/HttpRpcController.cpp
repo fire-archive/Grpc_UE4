@@ -1,7 +1,5 @@
 // Copyright 2015 Paddle Creek Games Inc. All Rights Reserved.
 #include "ProtoRPC_UE4PrivatePCH.h"
-
-#include "AllowWindowsPlatformTypes.h"
 #include "HttpRpcController.h"
 
 DEFINE_LOG_CATEGORY_STATIC(HttpRpcControllerLog, Log, All);
