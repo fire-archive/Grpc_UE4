@@ -97,6 +97,9 @@
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/stl_util.h>
 
+#pragma warning(push)
+#pragma warning(disable:4310)  // C4310: cast truncates constant value
+
 namespace google {
 namespace protobuf {
 namespace io {
@@ -1135,3 +1138,5 @@ bool Tokenizer::IsIdentifier(const string& text) {
 }  // namespace io
 }  // namespace protobuf
 }  // namespace google
+
+#pragma warning(pop)
