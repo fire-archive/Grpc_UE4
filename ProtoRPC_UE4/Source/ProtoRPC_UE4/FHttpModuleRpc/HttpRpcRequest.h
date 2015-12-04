@@ -18,9 +18,13 @@ namespace google {
 	}  // namespace protobuf.
 }  // namespace google.
 
+// Strategy to be used to serialize the HTTP request.
 enum class HttpRpcRequestStrategy {
+	// Serialize using JSON.
 	HRRS_JSON,
+	// Serialize using Protobuf Text format.
 	HRRS_PROTOASCII,
+	// Serialize using Protobuf binary format.
 	HRRS_PROTOBINARY,
 };
 
@@ -33,19 +37,19 @@ public:
 		google::protobuf::RpcController* Controller, const google::protobuf::Message* Request,
 		google::protobuf::Message* Response, google::protobuf::Closure* Done);
 	virtual ~HttpRpcRequest();
-	  
+
+	// Initializes the request.
+	// Returns true on success; false otherwise.
 	bool Init();
 
+	// Executes the request asynchronously.
+	// Returns false if the request couldn't be issued.
 	bool Execute();
 
 private:
 	static const FString kContentTypeJson;
 	static const FString kContentTypeBinary;
 	static const FString kContentTypeASCII;
-
-	bool SerializeAsJSON();
-	bool SerializeAsProtoASCII();
-	bool SerializeAsProtoBinary();
 
 	int ParseRequestIdFromResponse(FHttpResponsePtr response);
 	bool ParseMessageFromResponse(FHttpResponsePtr response);

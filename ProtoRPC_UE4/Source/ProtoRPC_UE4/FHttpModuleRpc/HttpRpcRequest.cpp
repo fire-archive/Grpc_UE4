@@ -48,83 +48,47 @@ HttpRpcRequest::HttpRpcRequest(
 	httpRequest_->SetHeader("X-Method", FString(Method->name().c_str()));
 }
 
-HttpRpcRequest::~HttpRpcRequest() {
-
-}
+HttpRpcRequest::~HttpRpcRequest() {}
 
 bool HttpRpcRequest::Init() {
-	bool serializedOk;
 	if (requestStrategy_ == HttpRpcRequestStrategy::HRRS_JSON) {
-		serializedOk = SerializeAsJSON();
-	}
-	else if (requestStrategy_ == HttpRpcRequestStrategy::HRRS_PROTOASCII) {
-		serializedOk = SerializeAsProtoASCII();
-	}
-	else if (requestStrategy_ == HttpRpcRequestStrategy::HRRS_PROTOBINARY) {
-		serializedOk = SerializeAsProtoBinary();
-	}
-	else {
+		std::string jsonString;
+		JsonOptions jsonOptions;
+		jsonOptions.always_print_primitive_fields = true;
+		jsonOptions.add_whitespace = true;
+		Status status = google::protobuf::util::BinaryToJsonString(
+			typeResolver_, GetTypeUrl(callState_.GetRequest()->GetDescriptor()), callState_.GetRequest()->SerializeAsString(),
+			&jsonString, jsonOptions);
+		if (!status.ok()) {
+			UE_LOG(HttpRpcRequestLog,
+				Error,
+				TEXT("Failed to serialize to json (%s)"),
+				*FString(status.error_message().ToString().c_str()));
+			callState_.GetController()->SetFailed("JSON serialization failed");
+			return false;
+		}
+		httpRequest_->SetHeader("Content-Type", kContentTypeJson);
+		httpRequest_->SetContentAsString(FString(jsonString.c_str()));
+	} else if (requestStrategy_ == HttpRpcRequestStrategy::HRRS_PROTOASCII) {
+		std::string textString;
+		if (!google::protobuf::TextFormat::PrintToString(*callState_.GetRequest(), &textString)) {
+			UE_LOG(HttpRpcRequestLog, Error, TEXT("Failed to serialize to text"));
+			callState_.GetController()->SetFailed("Text serialization failed");
+			return false;
+		}
+		httpRequest_->SetHeader("Content-Type", kContentTypeASCII);
+		httpRequest_->SetContentAsString(FString(textString.c_str()));
+	} else if (requestStrategy_ == HttpRpcRequestStrategy::HRRS_PROTOBINARY) {
+		std::string binaryString = callState_.GetRequest()->SerializeAsString();
+		httpRequest_->SetHeader("Content-Type", kContentTypeBinary);
+		httpRequest_->SetContentAsString(FString(binaryString.c_str()));
+	} else {
 		UE_LOG(HttpRpcRequestLog, Error, TEXT("Invalid HTTP request strategy"));
 		callState_.GetController()->SetFailed("Invalid HTTP request strategy");
 		return false;
 	}
 
-	if (!serializedOk) {
-		return false;
-	}
-
 	httpRequest_->OnProcessRequestComplete().BindRaw(this, &HttpRpcRequest::onHttpRequestCompleted);
-	return true;
-}
-
-bool HttpRpcRequest::SerializeAsProtoASCII() {
-	std::string textString;
-	if (!google::protobuf::TextFormat::PrintToString(*callState_.GetRequest(), &textString)) {
-		UE_LOG(HttpRpcRequestLog, Error, TEXT("Failed to serialize to text"));
-		callState_.GetController()->SetFailed("Text serialization failed");
-		return false;
-	}
-	httpRequest_->SetContentAsString(FString(textString.c_str()));
-	//UE_LOG(HttpRpcRequestLog, Display, TEXT("ascii_serialized: %s"), *FString(textString->c_str()));
-	httpRequest_->SetHeader("Content-Type", kContentTypeASCII);
-	return true;
-}
-
-bool HttpRpcRequest::SerializeAsProtoBinary() {
-	std::string binaryString = callState_.GetRequest()->SerializeAsString();
-	httpRequest_->SetContentAsString(FString(binaryString.c_str()));
-	httpRequest_->SetHeader("Content-Type", kContentTypeBinary);
-	return true;
-}
-
-bool HttpRpcRequest::SerializeAsJSON() {
-	FString stringBuffer;
-	{
-		std::string jsonString;
-		{
-			JsonOptions jsonOptions;
-			jsonOptions.always_print_primitive_fields = true;
-			jsonOptions.add_whitespace = true;
-			Status status = google::protobuf::util::BinaryToJsonString(
-				typeResolver_,
-				GetTypeUrl(callState_.GetRequest()->GetDescriptor()),
-				callState_.GetRequest()->SerializeAsString(),
-				&jsonString,
-				jsonOptions);
-			if (!status.ok()) {
-				UE_LOG(HttpRpcRequestLog,
-					Error,
-					TEXT("Failed to serialize to json (%s)"),
-					*FString(status.error_message().ToString().c_str()));
-				callState_.GetController()->SetFailed("JSON serialization failed");
-				return false;
-			}
-		}
-		stringBuffer = FString(jsonString.c_str());
-	}
-
-	httpRequest_->SetContentAsString(stringBuffer);
-	httpRequest_->SetHeader("Content-Type", kContentTypeJson);
 	return true;
 }
 

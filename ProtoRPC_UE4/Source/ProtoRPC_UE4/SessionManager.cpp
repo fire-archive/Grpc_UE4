@@ -7,6 +7,9 @@
 #include "FHttpModuleRpc/HttpRpcChannel.h"
 #include "FHttpModuleRpc/HttpRpcController.h"
 
+DEFINE_LOG_CATEGORY_STATIC(SessionManagerLog, Log, All);
+#define LOCTEXT_NAMESPACE "SessionManager"
+
 SessionManager::SessionManager()
     : sessionState_(SessionState::SS_NotAuthenticated),
 	  channel_(new HttpRpcChannel("http://1-dot-pcg-login.appspot.com/appengine_auth_svc")),
@@ -24,6 +27,7 @@ void SessionManager::StartAuthentication(const FString& Username, const FString&
 	authRequest_->set_hash(TCHAR_TO_UTF8(*HashedPassword));
 	controller_->Reset();
 	authService_->Authenticate(controller_, authRequest_, authResponse_, google::protobuf::NewCallback(this, &SessionManager::AuthenticationRpcCompleted, Completion));
+	UE_LOG(SessionManagerLog, Display, TEXT("Authentication started"));
 	sessionState_ = SessionState::SS_Authenticating;
 }
 
@@ -47,5 +51,6 @@ void SessionManager::AuthenticationRpcCompleted(AuthCompletionDelegate* Completi
 			sessionErrorMsg_ = "Empty message from server";
 		}
 	}
+	UE_LOG(SessionManagerLog, Display, TEXT("Authentication RPC completed (sessionState %d, sessionCookie %s, sessionError %s)"), (int)sessionState_, *sessionCookie_, *sessionErrorMsg_);;
 	Completion->ExecuteIfBound();
 }
