@@ -32,15 +32,15 @@ CONTENTS;
       an example server for the sample app.
 
 CAVEATS / KNOWN ISSUES:
-  - Streaming RPC's are not currently supported. This will take some time.
+  - Streaming RPC's are not currently supported and is unlikely to be supported
+    until I integrate gRPC support. Note: App Engine does not currently support
+    HTTP streaming, so streaming apps will need to be hosted in GCE/GKE/etc.
   - The binary transport is not yet tested.
 
 TODO:
   - Extract AppEngine RpcController and dispatch logic into a generic helper.
   - Clean up comments and documentation.
-  - Investigate moving back to a UE4 plugin since we're building all the code.
-  - Add binary HTTP transport
-  - Add GZIP support.
+  - Finish up & test the binary transport.
   - Port to gRPC.
 
 Notes:
