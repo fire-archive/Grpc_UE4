@@ -18,6 +18,7 @@ namespace com {
 	}
 }
 
+UENUM(BlueprintType)
 enum class SessionState {
 	SS_NotAuthenticated,
 	SS_Authenticating,
