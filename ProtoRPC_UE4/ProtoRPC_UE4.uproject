@@ -12,5 +12,8 @@
 				"Engine"
 			]
 		}
+	],
+	"AdditionalPluginDirectories": [
+		"/ProtoRPC_UE4/Plugins"
 	]
 }
