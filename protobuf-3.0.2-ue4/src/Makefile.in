@@ -816,6 +816,7 @@ am__nobase_include_HEADERS_DIST =  \
 	google/protobuf/compiler/python/python_generator.h \
 	google/protobuf/compiler/ruby/ruby_generator.h \
 	google/protobuf/util/type_resolver.h \
+    google/protobuf/util/windows_util.h \
 	google/protobuf/util/field_comparator.h \
 	google/protobuf/util/field_mask_util.h \
 	google/protobuf/util/json_util.h \
@@ -1308,6 +1309,7 @@ nobase_include_HEADERS = \
   google/protobuf/compiler/python/python_generator.h            \
   google/protobuf/compiler/ruby/ruby_generator.h                \
   google/protobuf/util/type_resolver.h                          \
+  google/protobuf/util/windows_util.h                           \
   google/protobuf/util/field_comparator.h                       \
   google/protobuf/util/field_mask_util.h                        \
   google/protobuf/util/json_util.h                              \
@@ -1437,7 +1439,8 @@ libprotobuf_la_SOURCES = \
   google/protobuf/util/json_util.cc                            \
   google/protobuf/util/message_differencer.cc                  \
   google/protobuf/util/time_util.cc                            \
-  google/protobuf/util/type_resolver_util.cc
+  google/protobuf/util/type_resolver_util.cc                   \
+  google/protobuf/util/windows_util.cc
 
 nodist_libprotobuf_la_SOURCES = $(nodist_libprotobuf_lite_la_SOURCES)
 libprotoc_la_LIBADD = $(PTHREAD_LIBS) libprotobuf.la
@@ -2273,6 +2276,9 @@ google/protobuf/util/time_util.lo:  \
 google/protobuf/util/type_resolver_util.lo:  \
 	google/protobuf/util/$(am__dirstamp) \
 	google/protobuf/util/$(DEPDIR)/$(am__dirstamp)
+google/protobuf/util/windows_util.lo:  \
+    google/protobuf/util/$(am__dirstamp) \
+    google/protobuf/util/$(DEPDIR)/$(am__dirstamp)
 
 libprotobuf.la: $(libprotobuf_la_OBJECTS) $(libprotobuf_la_DEPENDENCIES) $(EXTRA_libprotobuf_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libprotobuf_la_LINK) -rpath $(libdir) $(libprotobuf_la_OBJECTS) $(libprotobuf_la_LIBADD) $(LIBS)
@@ -3800,6 +3806,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/protobuf_test-type_resolver_util_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/time_util.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/type_resolver_util.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/$(DEPDIR)/windows_util.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/internal/$(DEPDIR)/datapiece.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/internal/$(DEPDIR)/default_value_objectwriter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@google/protobuf/util/internal/$(DEPDIR)/error_listener.Plo@am__quote@

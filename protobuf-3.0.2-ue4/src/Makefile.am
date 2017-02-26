@@ -165,6 +165,7 @@ nobase_include_HEADERS =                                        \
   google/protobuf/compiler/python/python_generator.h            \
   google/protobuf/compiler/ruby/ruby_generator.h                \
   google/protobuf/util/type_resolver.h                          \
+  google/protobuf/util/windows_util.h                           \
   google/protobuf/util/field_comparator.h                       \
   google/protobuf/util/field_mask_util.h                        \
   google/protobuf/util/json_util.h                              \
@@ -295,7 +296,8 @@ libprotobuf_la_SOURCES =                                       \
   google/protobuf/util/json_util.cc                            \
   google/protobuf/util/message_differencer.cc                  \
   google/protobuf/util/time_util.cc                            \
-  google/protobuf/util/type_resolver_util.cc
+  google/protobuf/util/type_resolver_util.cc                   \
+  google/protobuf/util/windows_util.cc
 
 nodist_libprotobuf_la_SOURCES = $(nodist_libprotobuf_lite_la_SOURCES)
 
