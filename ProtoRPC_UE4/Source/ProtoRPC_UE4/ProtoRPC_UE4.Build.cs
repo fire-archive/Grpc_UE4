@@ -54,7 +54,7 @@ public class ProtoRPC_UE4 : ModuleRules
 
     private string ModulePath {
         get {
-            return Path.GetDirectoryName(RulesCompiler.GetModuleFilename(this.GetType().Name)); 
+            return ModuleDirectory;
         }
     }
 
