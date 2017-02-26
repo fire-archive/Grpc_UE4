@@ -8,7 +8,7 @@ public class Grpc_Unreal : ModuleRules
 	{
         bFasterWithoutUnity = true;
 
-        PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
+        PrivateDependencyModuleNames.AddRange(new string[] { "HTTP", "Engine", "Core", "CoreUObject" });
 
         PublicIncludePaths.AddRange(
 			new string[] {

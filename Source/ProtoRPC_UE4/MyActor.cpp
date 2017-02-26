@@ -2,7 +2,7 @@
 
 #include "ProtoRPC_UE4PrivatePCH.h"
 #include "MyActor.h"
-//#include "SessionManager.h"
+#include "ISessionService.h"
 
 AMyActor::AMyActor() {
 	PrimaryActorTick.bCanEverTick = true;
