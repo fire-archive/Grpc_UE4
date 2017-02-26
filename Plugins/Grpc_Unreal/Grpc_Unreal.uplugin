@@ -16,7 +16,7 @@
 	"Modules": [
 		{
 			"Name": "Grpc_Unreal",
-			"Type": "Developer",
+			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
 	]

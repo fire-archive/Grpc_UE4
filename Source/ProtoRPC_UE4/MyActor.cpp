@@ -2,7 +2,7 @@
 
 #include "ProtoRPC_UE4PrivatePCH.h"
 #include "MyActor.h"
-#include "SessionManager.h"
+//#include "SessionManager.h"
 
 AMyActor::AMyActor() {
 	PrimaryActorTick.bCanEverTick = true;
@@ -11,7 +11,7 @@ AMyActor::AMyActor() {
 
 void AMyActor::BeginPlay() {
 	Super::BeginPlay();
-	sessionManager_.StartAuthentication("san", "some_secure_hash", &authDelegate_);
+	//sessionManager_.StartAuthentication("san", "some_secure_hash", &authDelegate_);
 }
 
 // Called every frame
@@ -20,7 +20,7 @@ void AMyActor::Tick( float DeltaTime ) {
 }
 
 void AMyActor::AuthenticationComplete() {
-	if (sessionManager_.GetSessionState() == SessionState::SS_Authenticated) {
+	if (/*sessionManager_.GetSessionState() == SessionState::SS_Authenticated*/true) {
 
 	}
 	else {

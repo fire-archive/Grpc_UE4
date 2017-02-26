@@ -7,26 +7,30 @@ public class ProtoRPC_UE4 : ModuleRules
 {
 	public ProtoRPC_UE4(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-		//PrivateIncludePathModulesNames.AddRange(new string[] { "HTTP" });
-		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
+        bFasterWithoutUnity = true;
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+        //PrivateIncludePathModulesNames.AddRange(new string[] { "HTTP" });
+        PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		PrivateDependencyModuleNames.Add("OnlineSubsystem");
+        // Uncomment if you are using Slate UI
+        // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+
+        // Uncomment if you are using online features
+        PrivateDependencyModuleNames.Add("OnlineSubsystem");
         PrivateDependencyModuleNames.Add("OnlineSubsystemNull");
-		// if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64))
-		// {
-		//		if (UEBuildConfiguration.bCompileSteamOSS == true)
-		//		{
-		//			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
-		//		}
-		// }
+        PrivateDependencyModuleNames.Add("Grpc_Unreal");
+        PrivateIncludePathModuleNames.AddRange(new string[] { "Grpc_Unreal" });
+        PublicIncludePaths.AddRange(new string[] { "Grpc_Unreal/Public", "Grpc_Unreal/Private" });
+        // if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64))
+        // {
+        //		if (UEBuildConfiguration.bCompileSteamOSS == true)
+        //		{
+        //			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
+        //		}
+        // }
 
-        	// LoadThirdParty(Target);
-	}
+        // LoadThirdParty(Target);
+    }
 
     private bool LoadThirdParty(TargetInfo Target) {
         bool isLibrarySupported = false;

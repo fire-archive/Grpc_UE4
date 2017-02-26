@@ -3,7 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "SessionManager.h"
+#include "Grpc_Unreal/Public/SessionManager.h"
 
 #include "MyActor.generated.h"
 
@@ -25,7 +25,7 @@ public:
 private:
 	void AuthenticationComplete();
 
-	SessionManager sessionManager_;
+	//SessionManager sessionManager_;
 	AuthCompletionDelegate authDelegate_;
 
 };

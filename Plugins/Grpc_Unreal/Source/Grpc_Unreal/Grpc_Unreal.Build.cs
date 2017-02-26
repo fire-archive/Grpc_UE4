@@ -6,8 +6,11 @@ public class Grpc_Unreal : ModuleRules
 {
 	public Grpc_Unreal(TargetInfo Target)
 	{
-		
-		PublicIncludePaths.AddRange(
+        bFasterWithoutUnity = true;
+
+        PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
+
+        PublicIncludePaths.AddRange(
 			new string[] {
 				"Grpc_Unreal/Public"
 				// ... add public include paths required here ...

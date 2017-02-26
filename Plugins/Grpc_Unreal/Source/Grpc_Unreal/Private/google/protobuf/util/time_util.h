@@ -31,10 +31,10 @@
 #ifndef GOOGLE_PROTOBUF_UTIL_TIME_UTIL_H__
 #define GOOGLE_PROTOBUF_UTIL_TIME_UTIL_H__
 
-#include <ctime>
 #include <ostream>
 #include <string>
 #ifdef _MSC_VER
+#include <ctime>
 #include "AllowWindowsPlatformTypes.h"
 #include <winsock2.h>
 #include "HideWindowsPlatformTypes.h"

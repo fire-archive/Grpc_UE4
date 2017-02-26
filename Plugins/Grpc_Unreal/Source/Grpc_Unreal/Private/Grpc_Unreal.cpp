@@ -46,6 +46,11 @@ void FGrpc_UnrealModule::ShutdownModule()
 	ExampleLibraryHandle = nullptr;
 }
 
+SessionManager *FGrpc_UnrealModule::GetSession() 
+{
+	return &Session;
+}
+
 #undef LOCTEXT_NAMESPACE
 	
 IMPLEMENT_MODULE(FGrpc_UnrealModule, Grpc_Unreal)
