@@ -80,7 +80,8 @@ void MergeFromFail(const char* file, int line) {
 }
 
 const ::std::string& GetEmptyStringAlreadyInited() {
-    return fixed_address_empty_string.get();
+    assert(empty_string_ != NULL);
+    return *empty_string_;
 }
 
 const ::std::string& GetEmptyString() {
