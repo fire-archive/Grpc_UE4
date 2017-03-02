@@ -2,21 +2,8 @@
 
 #pragma once
 #include "Engine.h"
-
-// Forward declarations.
-namespace google {
-	namespace protobuf {
-		class RpcChannel;
-		class RpcController;
-	}
-}
-namespace com {
-	namespace paddlecreekgames {
-		class AuthService;
-		class AuthRequest;
-		class AuthResponse;
-	}
-}
+#include <grpc++/channel.h>
+#include "GeneratedProtoStubs/ExampleService.grpc.pb.h"
 
 enum class SessionState {
 	SS_NotAuthenticated,
@@ -60,13 +47,12 @@ private:
 	// Session authentication cookie. Only valid when sessionState_ == SS_Authenticated.
 	FString sessionCookie_;
 	// Underlying RPC channel to use. Pointer owned.
-	TScopedPointer<google::protobuf::RpcChannel> channel_;
-	// Underlying RPC controller to use. Pointer owned.
-	TScopedPointer<google::protobuf::RpcController> controller_;
+	std::shared_ptr<grpc::Channel> channel_;
+	// Underlying grpc context to use. Pointer owned.
+	grpc::ClientContext* context_;
+	// The producer-consumer queue we use to communicate asynchronously with the
+    // gRPC runtime.
+    grpc::CompletionQueue* cq_;
 	// Underlying RPC service stub. Pointer owned.
-	TScopedPointer<com::paddlecreekgames::AuthService> authService_;
-	// Protocol buffer used to contain the auth request. Pointer owned.
-	TScopedPointer<com::paddlecreekgames::AuthRequest> authRequest_;
-	// Protocol buffer used to contain the auth response. Pointer owned.
-	TScopedPointer<com::paddlecreekgames::AuthResponse> authResponse_;
+	std::shared_ptr<com::paddlecreekgames::AuthService::Stub> authService_;
 };

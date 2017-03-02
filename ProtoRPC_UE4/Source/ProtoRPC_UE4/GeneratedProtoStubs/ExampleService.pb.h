@@ -26,7 +26,6 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/service.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "ExampleCharacter.pb.h"
 // @@protoc_insertion_point(includes)
@@ -46,7 +45,7 @@ class SuccessfullAuthResponse;
 
 // ===================================================================
 
-class AuthRequest : public ::google::protobuf::Message {
+class AuthRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:com.paddlecreekgames.AuthRequest) */ {
  public:
   AuthRequest();
   virtual ~AuthRequest();
@@ -80,7 +79,11 @@ class AuthRequest : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -141,7 +144,7 @@ class AuthRequest : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class SuccessfullAuthResponse : public ::google::protobuf::Message {
+class SuccessfullAuthResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:com.paddlecreekgames.SuccessfullAuthResponse) */ {
  public:
   SuccessfullAuthResponse();
   virtual ~SuccessfullAuthResponse();
@@ -175,7 +178,11 @@ class SuccessfullAuthResponse : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -234,7 +241,7 @@ class SuccessfullAuthResponse : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class FailedAuthResponse : public ::google::protobuf::Message {
+class FailedAuthResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:com.paddlecreekgames.FailedAuthResponse) */ {
  public:
   FailedAuthResponse();
   virtual ~FailedAuthResponse();
@@ -268,7 +275,11 @@ class FailedAuthResponse : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -317,7 +328,7 @@ class FailedAuthResponse : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AuthResponse : public ::google::protobuf::Message {
+class AuthResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:com.paddlecreekgames.AuthResponse) */ {
  public:
   AuthResponse();
   virtual ~AuthResponse();
@@ -357,7 +368,11 @@ class AuthResponse : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -426,65 +441,6 @@ class AuthResponse : public ::google::protobuf::Message {
 };
 // ===================================================================
 
-class AuthService_Stub;
-
-class AuthService : public ::google::protobuf::Service {
- protected:
-  // This class should be treated as an abstract interface.
-  inline AuthService() {};
- public:
-  virtual ~AuthService();
-
-  typedef AuthService_Stub Stub;
-
-  static const ::google::protobuf::ServiceDescriptor* descriptor();
-
-  virtual void Authenticate(::google::protobuf::RpcController* controller,
-                       const ::com::paddlecreekgames::AuthRequest* request,
-                       ::com::paddlecreekgames::AuthResponse* response,
-                       ::google::protobuf::Closure* done);
-
-  // implements Service ----------------------------------------------
-
-  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
-  void CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                  ::google::protobuf::RpcController* controller,
-                  const ::google::protobuf::Message* request,
-                  ::google::protobuf::Message* response,
-                  ::google::protobuf::Closure* done);
-  const ::google::protobuf::Message& GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method) const;
-  const ::google::protobuf::Message& GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method) const;
-
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(AuthService);
-};
-
-class AuthService_Stub : public AuthService {
- public:
-  AuthService_Stub(::google::protobuf::RpcChannel* channel);
-  AuthService_Stub(::google::protobuf::RpcChannel* channel,
-                   ::google::protobuf::Service::ChannelOwnership ownership);
-  ~AuthService_Stub();
-
-  inline ::google::protobuf::RpcChannel* channel() { return channel_; }
-
-  // implements AuthService ------------------------------------------
-
-  void Authenticate(::google::protobuf::RpcController* controller,
-                       const ::com::paddlecreekgames::AuthRequest* request,
-                       ::com::paddlecreekgames::AuthResponse* response,
-                       ::google::protobuf::Closure* done);
- private:
-  ::google::protobuf::RpcChannel* channel_;
-  bool owns_channel_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(AuthService_Stub);
-};
-
-
-// ===================================================================
-
 
 // ===================================================================
 
@@ -521,6 +477,7 @@ inline ::std::string* AuthRequest::mutable_username() {
   return username_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* AuthRequest::release_username() {
+  // @@protoc_insertion_point(field_release:com.paddlecreekgames.AuthRequest.Username)
   
   return username_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -564,6 +521,7 @@ inline ::std::string* AuthRequest::mutable_hash() {
   return hash_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* AuthRequest::release_hash() {
+  // @@protoc_insertion_point(field_release:com.paddlecreekgames.AuthRequest.Hash)
   
   return hash_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -611,6 +569,7 @@ inline ::std::string* SuccessfullAuthResponse::mutable_authtoken() {
   return authtoken_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* SuccessfullAuthResponse::release_authtoken() {
+  // @@protoc_insertion_point(field_release:com.paddlecreekgames.SuccessfullAuthResponse.AuthToken)
   
   return authtoken_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -645,6 +604,7 @@ inline ::com::paddlecreekgames::ExampleCharacter* SuccessfullAuthResponse::mutab
   return characterinfo_;
 }
 inline ::com::paddlecreekgames::ExampleCharacter* SuccessfullAuthResponse::release_characterinfo() {
+  // @@protoc_insertion_point(field_release:com.paddlecreekgames.SuccessfullAuthResponse.CharacterInfo)
   
   ::com::paddlecreekgames::ExampleCharacter* temp = characterinfo_;
   characterinfo_ = NULL;
@@ -695,6 +655,7 @@ inline ::std::string* FailedAuthResponse::mutable_errormessage() {
   return errormessage_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* FailedAuthResponse::release_errormessage() {
+  // @@protoc_insertion_point(field_release:com.paddlecreekgames.FailedAuthResponse.ErrorMessage)
   
   return errormessage_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -741,6 +702,7 @@ inline ::com::paddlecreekgames::SuccessfullAuthResponse* AuthResponse::mutable_s
   return AuthResponse_Oneof_.successfullauthdata_;
 }
 inline ::com::paddlecreekgames::SuccessfullAuthResponse* AuthResponse::release_successfullauthdata() {
+  // @@protoc_insertion_point(field_release:com.paddlecreekgames.AuthResponse.SuccessfullAuthData)
   if (has_successfullauthdata()) {
     clear_has_AuthResponse_Oneof();
     ::com::paddlecreekgames::SuccessfullAuthResponse* temp = AuthResponse_Oneof_.successfullauthdata_;
@@ -788,6 +750,7 @@ inline ::com::paddlecreekgames::FailedAuthResponse* AuthResponse::mutable_failed
   return AuthResponse_Oneof_.failedauthdata_;
 }
 inline ::com::paddlecreekgames::FailedAuthResponse* AuthResponse::release_failedauthdata() {
+  // @@protoc_insertion_point(field_release:com.paddlecreekgames.AuthResponse.FailedAuthData)
   if (has_failedauthdata()) {
     clear_has_AuthResponse_Oneof();
     ::com::paddlecreekgames::FailedAuthResponse* temp = AuthResponse_Oneof_.failedauthdata_;
@@ -829,5 +792,4 @@ inline AuthResponse::AuthResponseOneofCase AuthResponse::AuthResponse_Oneof_case
 }  // namespace com
 
 // @@protoc_insertion_point(global_scope)
-
 #endif  // PROTOBUF_ExampleService_2eproto__INCLUDED

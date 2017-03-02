@@ -1,6 +1,7 @@
 // Copyright 2015 Paddle Creek Games Inc. All Rights Reserved.
 
 using System.IO;
+using System;
 using UnrealBuildTool;
 
 public class ProtoRPC_UE4 : ModuleRules
@@ -8,14 +9,25 @@ public class ProtoRPC_UE4 : ModuleRules
 	public ProtoRPC_UE4(TargetInfo Target)
 	{
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-		//PrivateIncludePathModulesNames.AddRange(new string[] { "HTTP" });
 		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		PrivateDependencyModuleNames.Add("OnlineSubsystem");
+        string LibrariesPath = Path.Combine(ModulePath, "RelWithDebInfo");
+
+        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "gpr.lib"));
+        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "grpc.lib"));
+        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "grpc_dll.lib"));
+        PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "grpc++.lib"));
+        PublicAdditionalLibraries.Add("ThirdParty/zlib/zlib-1.2.5/Lib/Win64/zlib_64.lib");
+        PublicAdditionalLibraries.Add("ThirdParty/OpenSSL/1_0_2h/lib/Win64/VS2015/libeay64_static.lib");
+        PublicAdditionalLibraries.Add("ThirdParty/OpenSSL/1_0_2h/lib/Win64/VS2015/ssleay64_static.lib");
+        PublicDelayLoadDLLs.Add(Path.Combine(LibrariesPath, "grpc_dll.dll"));
+        RuntimeDependencies.Add(new RuntimeDependency(Path.Combine(Path.Combine(ModuleDirectory, "RelWithDebInfo"), "grpc_dll.dll")));
+
+        // Uncomment if you are using Slate UI
+        // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+
+        // Uncomment if you are using online features
+        PrivateDependencyModuleNames.Add("OnlineSubsystem");
         PrivateDependencyModuleNames.Add("OnlineSubsystemNull");
 		// if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64))
 		// {
