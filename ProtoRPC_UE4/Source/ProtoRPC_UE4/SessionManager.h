@@ -42,6 +42,8 @@ private:
 
 	// Current state of the session.
 	SessionState sessionState_;
+	// Authentication reply message.
+	TSharedPtr<com::paddlecreekgames::AuthResponse> authResponse_;
 	// Session error message. Only valid when sessionState_ == SS_AuthenticationFailed.
 	FString sessionErrorMsg_;
 	// Session authentication cookie. Only valid when sessionState_ == SS_Authenticated.
@@ -49,10 +51,12 @@ private:
 	// Underlying RPC channel to use. Pointer owned.
 	std::shared_ptr<grpc::Channel> channel_;
 	// Underlying grpc context to use. Pointer owned.
-	grpc::ClientContext* context_;
+	TSharedPtr<grpc::ClientContext> context_;
 	// The producer-consumer queue we use to communicate asynchronously with the
     // gRPC runtime.
-    grpc::CompletionQueue* cq_;
+    TSharedPtr<grpc::CompletionQueue> cq_;
+	// The status response
+	TSharedPtr<grpc::Status> status_;
 	// Underlying RPC service stub. Pointer owned.
-	std::shared_ptr<com::paddlecreekgames::AuthService::Stub> authService_;
+	TSharedPtr<com::paddlecreekgames::AuthService::Stub> authService_;
 };
