@@ -35,9 +35,6 @@
 #include <google/protobuf/reflection.h>
 #include <google/protobuf/repeated_field.h>
 
-#pragma warning(push)
-#pragma warning(disable:4800)  // C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
-
 namespace google {
 namespace protobuf {
 namespace internal {
@@ -378,5 +375,4 @@ class RepeatedPtrFieldMessageAccessor
 }  // namespace protobuf
 
 }  // namespace google
-#pragma warning(pop)
 #endif  // GOOGLE_PROTOBUF_REFLECTION_INTERNAL_H__

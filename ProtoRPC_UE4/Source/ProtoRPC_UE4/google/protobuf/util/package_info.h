@@ -28,26 +28,19 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+// This file exists solely to document the google::protobuf::util namespace.
+// It is not compiled into anything, but it may be read by an automated
+// documentation generator.
 
-package google.protobuf;
+namespace google {
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option java_generate_equals_and_hash = true;
-option objc_class_prefix = "GPB";
-option cc_enable_arenas = true;
+namespace protobuf {
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
+// Utility classes.
 //
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+// This package contains various utilities for message comprasion, JSON
+// conversion, well known types, etc.
+namespace util {}
+
+}  // namespace protobuf
+}  // namespace google

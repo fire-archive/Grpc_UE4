@@ -43,6 +43,17 @@
 #ifndef UTIL_MATH_MATHLIMITS_H__
 #define UTIL_MATH_MATHLIMITS_H__
 
+#if _MSC_VER >= 1300
+#ifndef _PS3
+#pragma warning(push)
+#pragma warning(disable : 4800) // error C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+#endif // _PS3
+#endif // _MSC_VER
+#if _GNUC
+#ifndef _PS3
+#endif // _PS3
+#endif // _GNUC
+
 // <math.h> lacks a lot of prototypes. However, this file needs <math.h> to
 // access old-fashioned isinf et al. Even worse more: this file must not
 // include <cmath> because that breaks the definition of isinf with gcc 4.9.
@@ -54,9 +65,6 @@
 #include <cfloat>
 
 #include <google/protobuf/stubs/common.h>
-
-#pragma warning(push)
-#pragma warning(disable:4800)  // C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
 
 // ========================================================================= //
 
@@ -233,11 +241,11 @@ DECL_UNSIGNED_INT_LIMITS(unsigned long long int)
   static bool IsNegInf(const Type x) { return _fpclass(x) == _FPCLASS_NINF; }
 #else
 #define DECL_FP_LIMIT_FUNCS \
-  static bool IsFinite(const Type x) { return !isinf(x)  &&  !isnan(x); } \
+  static bool IsFinite(const Type x) { return !isinf(x) && !isnan(x); } \
   static bool IsNaN(const Type x) { return isnan(x); } \
   static bool IsInf(const Type x) { return isinf(x); } \
-  static bool IsPosInf(const Type x) { return isinf(x)  &&  x > 0; } \
-  static bool IsNegInf(const Type x) { return isinf(x)  &&  x < 0; }
+  static bool IsPosInf(const Type x) { return isinf(x) && x > 0; } \
+  static bool IsNegInf(const Type x) { return isinf(x) && x < 0; }
 #endif
 
 // We can't put floating-point constant values in the header here because
@@ -279,5 +287,4 @@ DECL_FP_LIMITS(long double, LDBL)
 }  // namespace protobuf
 }  // namespace google
 
-#pragma warning(pop)
 #endif  // UTIL_MATH_MATHLIMITS_H__

@@ -36,7 +36,7 @@ namespace google {
 namespace protobuf {
 
 // Internal implementation detail -- do not call these.
-void protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
 void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
 void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 
@@ -49,12 +49,12 @@ enum NullValue {
   NullValue_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   NullValue_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool NullValue_IsValid(int value);
+LIBPROTOBUF_EXPORT bool NullValue_IsValid(int value);
 const NullValue NullValue_MIN = NULL_VALUE;
 const NullValue NullValue_MAX = NULL_VALUE;
 const int NullValue_ARRAYSIZE = NullValue_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* NullValue_descriptor();
+LIBPROTOBUF_EXPORT const ::google::protobuf::EnumDescriptor* NullValue_descriptor();
 inline const ::std::string& NullValue_Name(NullValue value) {
   return ::google::protobuf::internal::NameOfEnum(
     NullValue_descriptor(), value);
@@ -66,7 +66,7 @@ inline bool NullValue_Parse(
 }
 // ===================================================================
 
-class Struct : public ::google::protobuf::Message {
+class LIBPROTOBUF_EXPORT Struct : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Struct) */ {
  public:
   Struct();
   virtual ~Struct();
@@ -100,7 +100,11 @@ class Struct : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -149,7 +153,7 @@ class Struct : public ::google::protobuf::Message {
       ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
       0 > fields_;
   mutable int _cached_size_;
-  friend void  protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 
@@ -158,7 +162,7 @@ class Struct : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Value : public ::google::protobuf::Message {
+class LIBPROTOBUF_EXPORT Value : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Value) */ {
  public:
   Value();
   virtual ~Value();
@@ -202,7 +206,11 @@ class Value : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -311,7 +319,7 @@ class Value : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _oneof_case_[1];
 
-  friend void  protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 
@@ -320,7 +328,7 @@ class Value : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ListValue : public ::google::protobuf::Message {
+class LIBPROTOBUF_EXPORT ListValue : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ListValue) */ {
  public:
   ListValue();
   virtual ~ListValue();
@@ -354,7 +362,11 @@ class ListValue : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -395,7 +407,7 @@ class ListValue : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::google::protobuf::Value > values_;
   mutable int _cached_size_;
-  friend void  protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
+  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fstruct_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fstruct_2eproto();
 
@@ -550,6 +562,7 @@ inline ::std::string* Value::mutable_string_value() {
   return kind_.string_value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Value::release_string_value() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Value.string_value)
   if (has_string_value()) {
     clear_has_kind();
     return kind_.string_value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -628,6 +641,7 @@ inline ::google::protobuf::Struct* Value::mutable_struct_value() {
   return kind_.struct_value_;
 }
 inline ::google::protobuf::Struct* Value::release_struct_value() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Value.struct_value)
   if (has_struct_value()) {
     clear_has_kind();
     ::google::protobuf::Struct* temp = kind_.struct_value_;
@@ -675,6 +689,7 @@ inline ::google::protobuf::ListValue* Value::mutable_list_value() {
   return kind_.list_value_;
 }
 inline ::google::protobuf::ListValue* Value::release_list_value() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Value.list_value)
   if (has_list_value()) {
     clear_has_kind();
     ::google::protobuf::ListValue* temp = kind_.list_value_;

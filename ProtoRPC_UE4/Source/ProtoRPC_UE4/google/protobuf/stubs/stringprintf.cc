@@ -38,9 +38,6 @@
 #include <vector>
 #include <google/protobuf/stubs/common.h>
 
-#pragma warning(push)
-#pragma warning(disable:4996)  // C4996 - 'function': was declared deprecated
-
 namespace google {
 namespace protobuf {
 
@@ -175,5 +172,3 @@ string StringPrintfVector(const char* format, const vector<string>& v) {
 }
 }  // namespace protobuf
 }  // namespace google
-
-#pragma warning(pop)

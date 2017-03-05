@@ -31,6 +31,9 @@
 #ifndef GOOGLE_PROTOBUF_MAP_FIELD_INL_H__
 #define GOOGLE_PROTOBUF_MAP_FIELD_INL_H__
 
+#pragma warning(push)
+#pragma warning(disable:4800)  //  C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
+
 #include <memory>
 #ifndef _SHARED_PTR_H
 #include <google/protobuf/stubs/shared_ptr.h>
@@ -39,9 +42,6 @@
 #include <google/protobuf/map.h>
 #include <google/protobuf/map_field.h>
 #include <google/protobuf/map_type_handler.h>
-
-#pragma warning(push)
-#pragma warning(disable:4800)  //  C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
 
 namespace google {
 namespace protobuf {
@@ -158,7 +158,8 @@ void TypeDefinedMapFieldBase<Key, T>::CopyIterator(
   this_iter->key_.SetType(that_iter.key_.type());
   // MapValueRef::type() fails when containing data is null. However, if
   // this_iter points to MapEnd, data can be null.
-  this_iter->value_.SetType((FieldDescriptor::CppType)that_iter.value_.type_);
+  this_iter->value_.SetType(
+      static_cast<FieldDescriptor::CppType>(that_iter.value_.type_));
   SetMapIteratorValue(this_iter);
 }
 
@@ -264,16 +265,22 @@ template <typename Key, typename T,
           WireFormatLite::FieldType kValueFieldType,
           int default_enum_value>
 bool MapField<Key, T, kKeyFieldType, kValueFieldType,
-              default_enum_value>::InsertMapValue(const MapKey& map_key,
-                                                  MapValueRef* val) {
+              default_enum_value>::InsertOrLookupMapValue(
+                  const MapKey& map_key,
+                  MapValueRef* val) {
+  // Always use mutable map because users may change the map value by
+  // MapValueRef.
   Map<Key, T>* map = MutableMap();
-  bool result = false;
   const Key& key = UnwrapMapKey<Key>(map_key);
-  if (map->end() == map->find(key)) {
-    result = true;
+  typename Map<Key, T>::iterator iter = map->find(key);
+  if (map->end() == iter) {
+    val->SetValue(&((*map)[key]));
+    return true;
   }
-  val->SetValue(&((*map)[key]));
-  return result;
+  // Key is already in the map. Make sure (*map)[key] is not called.
+  // [] may reorder the map and iterators.
+  val->SetValue(&(iter->second));
+  return false;
 }
 
 template <typename Key, typename T,
@@ -482,5 +489,6 @@ MapField<Key, T, kKeyFieldType, kValueFieldType,
 }  // namespace protobuf
 
 }  // namespace google
+
 #pragma warning(pop)
 #endif  // GOOGLE_PROTOBUF_MAP_FIELD_INL_H__

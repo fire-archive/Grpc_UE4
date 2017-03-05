@@ -38,6 +38,10 @@
 
 #ifdef GOOGLE_PROTOBUF_ATOMICOPS_INTERNALS_X86_MSVC_H_
 
+#ifdef _AMD64_
+#define MemoryBarrier __faststorefence
+#endif
+
 #include <windows.h>
 
 namespace google {
@@ -46,7 +50,7 @@ namespace internal {
 
 inline void MemoryBarrier() {
   // We use MemoryBarrier from WinNT.h
-	MemoryBarrier();
+  ::MemoryBarrier();
 }
 
 Atomic32 NoBarrier_CompareAndSwap(volatile Atomic32* ptr,

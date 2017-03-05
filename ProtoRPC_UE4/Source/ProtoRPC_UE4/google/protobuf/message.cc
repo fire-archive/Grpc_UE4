@@ -55,7 +55,6 @@
 #include <google/protobuf/stubs/map_util.h>
 #include <google/protobuf/stubs/singleton.h>
 #include <google/protobuf/stubs/stl_util.h>
-#include <google/protobuf/stubs/port.h>
 
 namespace google {
 namespace protobuf {
@@ -63,14 +62,12 @@ namespace protobuf {
 using internal::WireFormat;
 using internal::ReflectionOps;
 
-Message::~Message() {}
-
 void Message::MergeFrom(const Message& from) {
   const Descriptor* descriptor = GetDescriptor();
   GOOGLE_CHECK_EQ(from.GetDescriptor(), descriptor)
     << ": Tried to merge from a message with a different type.  "
        "to: " << descriptor->full_name() << ", "
-       "from:" << from.GetDescriptor()->full_name();
+       "from: " << from.GetDescriptor()->full_name();
   ReflectionOps::Merge(from, this);
 }
 
@@ -83,7 +80,7 @@ void Message::CopyFrom(const Message& from) {
   GOOGLE_CHECK_EQ(from.GetDescriptor(), descriptor)
     << ": Tried to copy from a message with a different type. "
        "to: " << descriptor->full_name() << ", "
-       "from:" << from.GetDescriptor()->full_name();
+       "from: " << from.GetDescriptor()->full_name();
   ReflectionOps::Copy(from, this);
 }
 
@@ -495,11 +492,19 @@ Message* GenericTypeHandler<Message>::NewFromPrototype(
   return prototype->New(arena);
 }
 template<>
+#if defined(_MSC_VER) && (_MSC_VER >= 1900)
+// Note: force noinline to workaround MSVC 2015 compiler bug, issue #240
+GOOGLE_ATTRIBUTE_NOINLINE
+#endif
 google::protobuf::Arena* GenericTypeHandler<Message>::GetArena(
     Message* value) {
   return value->GetArena();
 }
 template<>
+#if defined(_MSC_VER) && (_MSC_VER >= 1900)
+// Note: force noinline to workaround MSVC 2015 compiler bug, issue #240
+GOOGLE_ATTRIBUTE_NOINLINE
+#endif
 void* GenericTypeHandler<Message>::GetMaybeArenaPointer(
     Message* value) {
   return value->GetMaybeArenaPointer();

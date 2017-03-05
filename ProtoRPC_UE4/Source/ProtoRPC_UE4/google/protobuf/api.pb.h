@@ -27,15 +27,15 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/unknown_field_set.h>
-#include "google/protobuf/source_context.pb.h"
-#include "google/protobuf/type.pb.h"
+#include <google/protobuf/source_context.pb.h>
+#include <google/protobuf/type.pb.h>
 // @@protoc_insertion_point(includes)
 
 namespace google {
 namespace protobuf {
 
 // Internal implementation detail -- do not call these.
-void protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
 void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
 void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
@@ -45,7 +45,7 @@ class Mixin;
 
 // ===================================================================
 
-class Api : public ::google::protobuf::Message {
+class LIBPROTOBUF_EXPORT Api : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Api) */ {
  public:
   Api();
   virtual ~Api();
@@ -79,7 +79,11 @@ class Api : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -187,7 +191,7 @@ class Api : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::google::protobuf::Mixin > mixins_;
   int syntax_;
   mutable int _cached_size_;
-  friend void  protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
@@ -196,7 +200,7 @@ class Api : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Method : public ::google::protobuf::Message {
+class LIBPROTOBUF_EXPORT Method : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Method) */ {
  public:
   Method();
   virtual ~Method();
@@ -230,7 +234,11 @@ class Method : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -328,7 +336,7 @@ class Method : public ::google::protobuf::Message {
   int syntax_;
   ::google::protobuf::RepeatedPtrField< ::google::protobuf::Option > options_;
   mutable int _cached_size_;
-  friend void  protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
@@ -337,7 +345,7 @@ class Method : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Mixin : public ::google::protobuf::Message {
+class LIBPROTOBUF_EXPORT Mixin : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Mixin) */ {
  public:
   Mixin();
   virtual ~Mixin();
@@ -371,7 +379,11 @@ class Mixin : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -423,7 +435,7 @@ class Mixin : public ::google::protobuf::Message {
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr root_;
   mutable int _cached_size_;
-  friend void  protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
+  friend void LIBPROTOBUF_EXPORT protobuf_AddDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_AssignDesc_google_2fprotobuf_2fapi_2eproto();
   friend void protobuf_ShutdownFile_google_2fprotobuf_2fapi_2eproto();
 
@@ -468,6 +480,7 @@ inline ::std::string* Api::mutable_name() {
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Api::release_name() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Api.name)
   
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -571,6 +584,7 @@ inline ::std::string* Api::mutable_version() {
   return version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Api::release_version() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Api.version)
   
   return version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -605,6 +619,7 @@ inline ::google::protobuf::SourceContext* Api::mutable_source_context() {
   return source_context_;
 }
 inline ::google::protobuf::SourceContext* Api::release_source_context() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Api.source_context)
   
   ::google::protobuf::SourceContext* temp = source_context_;
   source_context_ = NULL;
@@ -699,6 +714,7 @@ inline ::std::string* Method::mutable_name() {
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Method::release_name() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Method.name)
   
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -742,6 +758,7 @@ inline ::std::string* Method::mutable_request_type_url() {
   return request_type_url_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Method::release_request_type_url() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Method.request_type_url)
   
   return request_type_url_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -799,6 +816,7 @@ inline ::std::string* Method::mutable_response_type_url() {
   return response_type_url_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Method::release_response_type_url() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Method.response_type_url)
   
   return response_type_url_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -904,6 +922,7 @@ inline ::std::string* Mixin::mutable_name() {
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Mixin::release_name() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Mixin.name)
   
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -947,6 +966,7 @@ inline ::std::string* Mixin::mutable_root() {
   return root_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Mixin::release_root() {
+  // @@protoc_insertion_point(field_release:google.protobuf.Mixin.root)
   
   return root_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }

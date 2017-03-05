@@ -2,11 +2,12 @@
 // source: google/protobuf/source_context.proto
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
-#include "google/protobuf/source_context.pb.h"
+#include <google/protobuf/source_context.pb.h>
 
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -28,6 +29,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_google_2fprotobuf_2fsource_5fcontext_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_google_2fprotobuf_2fsource_5fcontext_2eproto() {
   protobuf_AddDesc_google_2fprotobuf_2fsource_5fcontext_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -59,6 +61,7 @@ inline void protobuf_AssignDescriptorsOnce() {
                  &protobuf_AssignDesc_google_2fprotobuf_2fsource_5fcontext_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -72,6 +75,7 @@ void protobuf_ShutdownFile_google_2fprotobuf_2fsource_5fcontext_2eproto() {
   delete SourceContext_reflection_;
 }
 
+void protobuf_AddDesc_google_2fprotobuf_2fsource_5fcontext_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_google_2fprotobuf_2fsource_5fcontext_2eproto() {
   static bool already_here = false;
   if (already_here) return;
@@ -98,21 +102,11 @@ struct StaticDescriptorInitializer_google_2fprotobuf_2fsource_5fcontext_2eproto 
   }
 } static_descriptor_initializer_google_2fprotobuf_2fsource_5fcontext_2eproto_;
 
-namespace {
-
-static void MergeFromFail(int line) GOOGLE_ATTRIBUTE_COLD;
-static void MergeFromFail(int line) {
-  GOOGLE_CHECK(false) << __FILE__ << ":" << line;
-}
-
-}  // namespace
-
-
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int SourceContext::kFileNameFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SourceContext::SourceContext()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
@@ -176,12 +170,13 @@ SourceContext* SourceContext::New(::google::protobuf::Arena* arena) const {
 }
 
 void SourceContext::Clear() {
+// @@protoc_insertion_point(message_clear_start:google.protobuf.SourceContext)
   file_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 bool SourceContext::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:google.protobuf.SourceContext)
   for (;;) {
@@ -242,8 +237,8 @@ void SourceContext::SerializeWithCachedSizes(
   // @@protoc_insertion_point(serialize_end:google.protobuf.SourceContext)
 }
 
-::google::protobuf::uint8* SourceContext::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* SourceContext::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.SourceContext)
   // optional string file_name = 1;
   if (this->file_name().size() > 0) {
@@ -261,6 +256,7 @@ void SourceContext::SerializeWithCachedSizes(
 }
 
 int SourceContext::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:google.protobuf.SourceContext)
   int total_size = 0;
 
   // optional string file_name = 1;
@@ -277,19 +273,27 @@ int SourceContext::ByteSize() const {
 }
 
 void SourceContext::MergeFrom(const ::google::protobuf::Message& from) {
-  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+// @@protoc_insertion_point(generalized_merge_from_start:google.protobuf.SourceContext)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   const SourceContext* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const SourceContext>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:google.protobuf.SourceContext)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:google.protobuf.SourceContext)
     MergeFrom(*source);
   }
 }
 
 void SourceContext::MergeFrom(const SourceContext& from) {
-  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+// @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.SourceContext)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
   if (from.file_name().size() > 0) {
 
     file_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.file_name_);
@@ -297,12 +301,14 @@ void SourceContext::MergeFrom(const SourceContext& from) {
 }
 
 void SourceContext::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:google.protobuf.SourceContext)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void SourceContext::CopyFrom(const SourceContext& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.SourceContext)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -364,6 +370,7 @@ void SourceContext::clear_file_name() {
   return file_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* SourceContext::release_file_name() {
+  // @@protoc_insertion_point(field_release:google.protobuf.SourceContext.file_name)
   
   return file_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }

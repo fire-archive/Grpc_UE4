@@ -37,11 +37,6 @@
 #include <google/protobuf/stubs/logging.h>
 #include <google/protobuf/stubs/mathlimits.h>
 
-
-#pragma warning(push)
-#pragma warning(disable:4800)  // C4800 - 'type' : forcing value to bool 'true' or 'false' (performance warning)
-#pragma warning(disable:4146)  // C4146 - unary minus operator applied to unsigned type, result still unsigned
-
 namespace google {
 namespace protobuf {
 namespace internal {
@@ -88,7 +83,7 @@ class MathUtil {
     if (value == T(0) || ::google::protobuf::internal::IsNan<T>(value)) {
       return value;
     }
-    return value > T(0) ? value : -value;
+    return value > T(0) ? 1 : -1;
   }
 
   template<typename T>
@@ -163,5 +158,5 @@ bool MathUtil::WithinFractionOrMargin(const T x, const T y,
 
 }  // namespace protobuf
 }  // namespace google
-#pragma warning(pop)
+
 #endif  // GOOGLE_PROTOBUF_STUBS_MATHUTIL_H_

@@ -8,8 +8,11 @@ public class ProtoRPC_UE4 : ModuleRules
 {
 	public ProtoRPC_UE4(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
+        bFasterWithoutUnity = true;
+
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP", "zlib" });
+
 
         string LibrariesPath = Path.Combine(ModulePath, "RelWithDebInfo");
 
@@ -21,8 +24,8 @@ public class ProtoRPC_UE4 : ModuleRules
         PublicAdditionalLibraries.Add("ThirdParty/OpenSSL/1_0_2h/lib/Win64/VS2015/libeay64_static.lib");
         PublicAdditionalLibraries.Add("ThirdParty/OpenSSL/1_0_2h/lib/Win64/VS2015/ssleay64_static.lib");
         PublicDelayLoadDLLs.Add(Path.Combine(LibrariesPath, "grpc_dll.dll"));
-        RuntimeDependencies.Add(new RuntimeDependency(Path.Combine(Path.Combine(ModuleDirectory, "RelWithDebInfo"), "grpc_dll.dll")));
-
+        RuntimeDependencies.Add(new RuntimeDependency(Path.Combine(LibrariesPath, "grpc_dll.dll")));
+        
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
@@ -37,7 +40,7 @@ public class ProtoRPC_UE4 : ModuleRules
 		//		}
 		// }
 
-        	// LoadThirdParty(Target);
+       LoadThirdParty(Target);
 	}
 
     private bool LoadThirdParty(TargetInfo Target) {
@@ -49,8 +52,8 @@ public class ProtoRPC_UE4 : ModuleRules
             string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "x86";
             string LibrariesPath = Path.Combine(ThirdPartyPath, "GoogleProtoBuf", "Libraries");
 
-            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "libprotobuf.lib"));
-            PublicDelayLoadDLLs.Add(Path.Combine(LibrariesPath, "libprotobuf.dll"));
+            //PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "libprotobuf.lib"));
+            //PublicDelayLoadDLLs.Add(Path.Combine(LibrariesPath, "libprotobuf.dll"));
         }
 
         if (isLibrarySupported) {
@@ -59,6 +62,7 @@ public class ProtoRPC_UE4 : ModuleRules
         }
 
         Definitions.Add(string.Format("WITH_GOOGLE_PROTOBUF_BINDING={0}", isLibrarySupported ? 1 : 0));
+        Definitions.Add(string.Format("PROTOBUF_USE_EXCEPTIONS={0}", 0));
 
         return isLibrarySupported;
     }

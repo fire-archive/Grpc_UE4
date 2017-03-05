@@ -60,17 +60,34 @@ void InitEmptyString() {
   OnShutdown(&DeleteEmptyString);
 }
 
+int StringSpaceUsedExcludingSelf(const string& str) {
+  const void* start = &str;
+  const void* end = &str + 1;
+  if (start <= str.data() && str.data() < end) {
+    // The string's data is stored inside the string object itself.
+    return 0;
+  } else {
+    return str.capacity();
+  }
+}
+
+
+
+void MergeFromFail(const char* file, int line) {
+  GOOGLE_CHECK(false) << file << ":" << line;
+  // Open-source GOOGLE_CHECK(false) is not NORETURN.
+  exit(1);
+}
 
 const ::std::string& GetEmptyStringAlreadyInited() {
-	assert(empty_string_ != NULL);
-	return *empty_string_;
+    assert(empty_string_ != NULL);
+    return *empty_string_;
 }
 
 const ::std::string& GetEmptyString() {
-	::google::protobuf::GoogleOnceInit(&empty_string_once_init_, &InitEmptyString);
-	return GetEmptyStringAlreadyInited();
+    ::google::protobuf::GoogleOnceInit(&empty_string_once_init_, &InitEmptyString);
+    return GetEmptyStringAlreadyInited();
 }
-
 
 }  // namespace internal
 }  // namespace protobuf

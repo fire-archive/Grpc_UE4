@@ -41,9 +41,9 @@
 #include <assert.h>
 #include <string>
 
+#include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/once.h>
 
-#include <google/protobuf/stubs/common.h>
 namespace google {
 
 namespace protobuf {
@@ -63,6 +63,8 @@ namespace internal {
 #undef DEPRECATED_PROTOBUF_FIELD
 #define PROTOBUF_DEPRECATED
 
+#define GOOGLE_PROTOBUF_DEPRECATED_ATTR
+
 
 // Constants for special floating point values.
 LIBPROTOBUF_EXPORT double Infinity();
@@ -79,16 +81,9 @@ LIBPROTOBUF_EXPORT extern const ::std::string* empty_string_;
 LIBPROTOBUF_EXPORT extern ProtobufOnceType empty_string_once_init_;
 LIBPROTOBUF_EXPORT void InitEmptyString();
 
-
 LIBPROTOBUF_EXPORT const ::std::string& GetEmptyStringAlreadyInited();
 LIBPROTOBUF_EXPORT const ::std::string& GetEmptyString();
 
-// Defined in generated_message_reflection.cc -- not actually part of the lite
-// library.
-//
-// TODO(jasonh): The various callers get this declaration from a variety of
-// places: probably in most cases repeated_field.h. Clean these up so they all
-// get the declaration from this file.
 LIBPROTOBUF_EXPORT int StringSpaceUsedExcludingSelf(const string& str);
 
 
@@ -110,8 +105,13 @@ class ArenaString;
 // pointer to a copy of the string that resides in *arena.  Requires both
 // args to be non-NULL.  If something goes wrong while reading the data
 // then NULL is returned (e.g., input does not start with a valid varint).
-ArenaString* ReadArenaString(::google::protobuf::io::CodedInputStream* input,
-                             ::google::protobuf::Arena* arena);
+LIBPROTOBUF_EXPORT ArenaString* ReadArenaString(
+    ::google::protobuf::io::CodedInputStream* input,
+    ::google::protobuf::Arena* arena);
+
+// Helper function to crash on merge failure.
+// Moved out of generated code to reduce binary size.
+LIBPROTOBUF_EXPORT void MergeFromFail(const char* file, int line) GOOGLE_ATTRIBUTE_NORETURN;
 
 }  // namespace internal
 }  // namespace protobuf

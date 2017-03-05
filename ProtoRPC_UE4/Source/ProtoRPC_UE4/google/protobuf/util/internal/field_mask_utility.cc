@@ -28,13 +28,24 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+#if _MSC_VER >= 1300
+#ifndef _PS3
+#pragma warning(push)
+#pragma warning(disable : 4018)	// error C4018: '<': signed/unsigned mismatch
+#endif // _PS3
+#endif // _MSC_VER
+#if _GNUC
+#ifndef _PS3
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#endif // _PS3
+#endif // _GNUC
+
 #include <google/protobuf/util/internal/field_mask_utility.h>
 
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/status_macros.h>
-
-#pragma warning(push)
-#pragma warning(disable: 4018)  //  C4018 - 'expression' : signed/unsigned mismatch
 
 namespace google {
 namespace protobuf {
@@ -226,5 +237,3 @@ util::Status DecodeCompactFieldMaskPaths(StringPiece paths,
 }  // namespace util
 }  // namespace protobuf
 }  // namespace google
-
-#pragma warning(pop)

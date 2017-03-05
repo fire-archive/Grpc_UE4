@@ -5,10 +5,6 @@
 
 #include <google/protobuf/stubs/stringpiece.h>
 
-#pragma warning(push)
-#pragma warning(disable:4510)  //  C4510 - 'type' : default constructor could not be generated
-#pragma warning(disable:4610)  //  C4610 - 'type' : can never be instantiated - user defined constructor required
-
 namespace google {
 namespace protobuf {
 namespace internal {
@@ -590,5 +586,3 @@ char* UTF8CoerceToStructurallyValid(const StringPiece& src_str,
 }  // namespace internal
 }  // namespace protobuf
 }  // namespace google
-
-#pragma warning(pop)
