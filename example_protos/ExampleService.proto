@@ -21,7 +21,7 @@ import "ExampleCharacter.proto";
 message AuthRequest {
   // Username to authenticate.
   string Username = 1;
-  // Some hasahed password. Heh.
+  // Some hashed password. Heh.
   string Hash = 2;
 }
 
