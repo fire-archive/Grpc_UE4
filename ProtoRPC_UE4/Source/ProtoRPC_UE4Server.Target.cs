@@ -5,7 +5,7 @@ using System.Collections.Generic;
  
 public class ProtoRPC_UE4ServerTarget : TargetRules
 {
-    public ProtoRPC_UE4ServerTarget(TargetInfo Target)
+    public ProtoRPC_UE4ServerTarget(TargetInfo Target) : base(Target)
     {
         Type = TargetType.Server;
     }
@@ -21,11 +21,5 @@ public class ProtoRPC_UE4ServerTarget : TargetRules
     {
         base.SetupBinaries(Target, ref OutBuildBinaryConfigurations, ref OutExtraModuleNames);
         OutExtraModuleNames.Add("ProtoRPC_UE4");
-    }
- 
-    public override bool GetSupportedPlatforms(ref List<UnrealTargetPlatform> OutPlatforms)
-    {
-        // It is valid for only server platforms
-        return UnrealBuildTool.UnrealBuildTool.GetAllServerPlatforms(ref OutPlatforms, false);
     }
 }

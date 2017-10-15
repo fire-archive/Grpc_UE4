@@ -5,13 +5,15 @@ using System;
 using UnrealBuildTool;
 
 public class ProtoRPC_UE4 : ModuleRules
-{
-	public ProtoRPC_UE4(TargetInfo Target)
-	{
+{       
+  public ProtoRPC_UE4(ReadOnlyTargetRules Target) : base(Target)
+  {
+        PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+        bEnforceIWYU = false;
         bFasterWithoutUnity = true;
 
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP", "zlib" });
+        PrivateDependencyModuleNames.AddRange(new string[] { "HTTP", "zlib" });
 
 
         string LibrariesPath = Path.Combine(ModulePath, "RelWithDebInfo");
@@ -32,18 +34,18 @@ public class ProtoRPC_UE4 : ModuleRules
         // Uncomment if you are using online features
         PrivateDependencyModuleNames.Add("OnlineSubsystem");
         PrivateDependencyModuleNames.Add("OnlineSubsystemNull");
-		// if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64))
-		// {
-		//		if (UEBuildConfiguration.bCompileSteamOSS == true)
-		//		{
-		//			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
-		//		}
-		// }
+    // if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64))
+    // {
+    //    if (UEBuildConfiguration.bCompileSteamOSS == true)
+    //    {
+    //      DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
+    //    }
+    // }
 
-       LoadThirdParty(Target);
-	}
+    //   LoadThirdParty(Target);
+  }
 
-    private bool LoadThirdParty(TargetInfo Target) {
+/*     private bool LoadThirdParty(TargetInfo Target) {
         bool isLibrarySupported = false;
 
         if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32)) {
@@ -65,7 +67,7 @@ public class ProtoRPC_UE4 : ModuleRules
         Definitions.Add(string.Format("PROTOBUF_USE_EXCEPTIONS={0}", 0));
 
         return isLibrarySupported;
-    }
+    }*/
  
 
     private string ModulePath {
@@ -78,5 +80,5 @@ public class ProtoRPC_UE4 : ModuleRules
         get {
             return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/")); 
         }
-    }
+    } 
 }
