@@ -69,7 +69,6 @@
 #endif
 
 #if defined(_WIN32) && defined(GetMessage)
-#include "AllowWindowsPlatformTypes.h"
 // Allow GetMessage to be used as a valid method name in protobuf classes.
 // windows.h defines GetMessage() as a macro.  Let's re-define it as an inline
 // function.  The inline function should be equivalent for C++ users.
@@ -84,7 +83,6 @@ inline BOOL GetMessage(
     UINT wMsgFilterMin, UINT wMsgFilterMax) {
   return GetMessage_Win32(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
 }
-#include "HideWindowsPlatformTypes.h"
 #endif
 
 namespace std {}

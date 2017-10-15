@@ -1,6 +1,4 @@
 // Copyright 2015 Paddle Creek Games Inc. All Rights Reserved.
-#include "ProtoRPC_UE4PrivatePCH.h"
-
 #include "SessionManager.h"
 
 #include "GeneratedProtoStubs/ExampleService.grpc.pb.h"
@@ -10,6 +8,8 @@
 #include <grpc++/client_context.h>
 #include <grpc++/create_channel.h>
 #include <grpc++/security/credentials.h>
+
+
 
 DEFINE_LOG_CATEGORY_STATIC(SessionManagerLog, Log, All);
 #define LOCTEXT_NAMESPACE "SessionManager"
