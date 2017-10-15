@@ -10,9 +10,12 @@ public class ProtoRPC_UE4 : ModuleRules
 		bEnforceIWYU = true;
 		bFasterWithoutUnity = true;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GrpcPlugin" });
-		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
+		Definitions.Add(string.Format("WITH_GOOGLE_PROTOBUF_BINDING={0}", 1));
+		Definitions.Add(string.Format("PROTOBUF_USE_EXCEPTIONS={0}", 0));
 
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "HTTP" });
+		
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
@@ -28,30 +31,14 @@ public class ProtoRPC_UE4 : ModuleRules
 		// }
 
 		//   LoadThirdParty(Target);
+
+		PrivateIncludePaths.AddRange(
+		new string[] {
+				"GrpcPlugin/Public",
+				"GrpcPlugin/Public/google",
+				"GrpcPlugin/Public/grpc",
+				"GrpcPlugin/Public/grpc++"
+		}
+	);
 	}
-
-	/*     private bool LoadThirdParty(TargetInfo Target) {
-			bool isLibrarySupported = false;
-
-			if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32)) {
-				isLibrarySupported = true;
-
-				string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "x86";
-				string LibrariesPath = Path.Combine(ThirdPartyPath, "GoogleProtoBuf", "Libraries");
-
-				//PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "libprotobuf.lib"));
-				//PublicDelayLoadDLLs.Add(Path.Combine(LibrariesPath, "libprotobuf.dll"));
-			}
-
-			if (isLibrarySupported) {
-				// Include path
-				PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "GoogleProtoBuf", "Includes"));
-			}
-
-			Definitions.Add(string.Format("WITH_GOOGLE_PROTOBUF_BINDING={0}", isLibrarySupported ? 1 : 0));
-			Definitions.Add(string.Format("PROTOBUF_USE_EXCEPTIONS={0}", 0));
-
-			return isLibrarySupported;
-		}*/
-
 }

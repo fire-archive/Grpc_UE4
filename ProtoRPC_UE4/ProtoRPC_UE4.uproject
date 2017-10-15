@@ -1,16 +1,16 @@
 {
-  "FileVersion": 3,
-  "EngineAssociation": "4.17",
-  "Category": "",
-  "Description": "",
-  "Modules": [
-    {
-      "Name": "ProtoRPC_UE4",
-      "Type": "Runtime",
-      "LoadingPhase": "Default",
-      "AdditionalDependencies": [
-        "Engine"
-      ]
-    }
-  ]
+	"FileVersion": 3,
+	"EngineAssociation": "{106C3CD2-47DA-3343-E096-36867F594207}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "ProtoRPC_UE4",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	]
 }

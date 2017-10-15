@@ -12,7 +12,7 @@ public class GrpcPlugin : ModuleRules
 		bEnforceIWYU = false;
 		bFasterWithoutUnity = true;
 
-		string LibrariesPath = Path.Combine(ModulePath, "RelWithDebInfo");
+		//string LibrariesPath = Path.Combine(ModulePath, "RelWithDebInfo");
 
 		//PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "gpr.lib"));
 		//PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "grpc.lib"));
@@ -24,6 +24,9 @@ public class GrpcPlugin : ModuleRules
 		//PublicAdditionalLibraries.Add("ThirdParty/OpenSSL/1_0_2h/lib/Win64/VS2015/ssleay64_static.lib");
 		//PublicDelayLoadDLLs.Add(Path.Combine(LibrariesPath, "grpc_dll.dll"));
 		//RuntimeDependencies.Add(new RuntimeDependency(Path.Combine(LibrariesPath, "grpc_dll.dll")));
+
+		Definitions.Add(string.Format("WITH_GOOGLE_PROTOBUF_BINDING={0}", 1));
+		Definitions.Add(string.Format("PROTOBUF_USE_EXCEPTIONS={0}", 0));
 
 		PublicIncludePaths.AddRange(
 			new string[] {
